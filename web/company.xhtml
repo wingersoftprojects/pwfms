@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:body>
+        <ui:composition template="./layout.xhtml">
+            <ui:define name="metadata">
+                <f:metadata>
+                    <f:event listener="#{user_detailBean.init()}" type="preRenderView" />
+                    <f:event listener="#{user_detailBean.initializelist()}" type="preRenderView" />
+                </f:metadata>
+            </ui:define>
+            <ui:define name="content">
+                <f:view>
+                    <h:form id="main_form">
+                        <p:growl id="messages" showDetail="true" />
+                        <p:accordionPanel multiple="true" id="main_accord_panel">
+                            <p:tab id="tab1" title="Company">
+                                <p:panelGrid id="panel_grid1" columns="2">
+                                    <p:panelGrid columns="2" id="panel_detail1">
+                                        <p:outputLabel value="User Category:" for="user_category"/>
+                                        <p:inputText id="user_category" value="#{user_detailBean.selected.user_category}" required="true" requiredMessage="User category is required"/>
+                                        <p:outputLabel value="Username:" for="user_name"/>
+                                        <p:inputText id="user_name" value="#{user_detailBean.selected.user_name}" required="true" requiredMessage="Username is required"/>
+                                        <p:outputLabel value="Override password?:" for="override_password" rendered="#{user_detailBean.selected.user_detail_id>0}"/>
+                                        <p:selectBooleanCheckbox id="override_password" value="#{user_detailBean.overridePassword}" rendered="#{user_detailBean.selected.user_detail_id>0}" required="true" requiredMessage="Override password field is needed">
+                                            <p:ajax process="@this" update="main_form:main_accord_panel:panel_grid1"/>
+                                        </p:selectBooleanCheckbox>
+
+                                        <p:outputLabel value="Password:" id="label_password" for="password" rendered="#{(user_detailBean.selected.user_detail_id==0) or (user_detailBean.selected.user_detail_id>0 and user_detailBean.overridePassword)}"/>
+                                        <p:password id="password" value="#{user_detailBean.selected.user_password}" required="#{(user_detailBean.selected.user_detail_id==0) or (user_detailBean.selected.user_detail_id>0 and user_detailBean.overridePassword)}" requiredMessage="Password is required" rendered="#{(user_detailBean.selected.user_detail_id==0) or (user_detailBean.selected.user_detail_id>0 and user_detailBean.overridePassword)}"/>
+
+                                        <p:outputLabel value="Confirm Password:" id="label_confirm_password" for="confirm_password" rendered="#{(user_detailBean.selected.user_detail_id==0) or (user_detailBean.selected.user_detail_id>0 and user_detailBean.overridePassword)}"/>
+                                        <p:password id="confirm_password" value="#{user_detailBean.confirmPassword}" required="#{(user_detailBean.selected.user_detail_id==0) or (user_detailBean.selected.user_detail_id>0 and user_detailBean.overridePassword)}" requiredMessage="Confirm password is required" rendered="#{(user_detailBean.selected.user_detail_id==0) or (user_detailBean.selected.user_detail_id>0 and user_detailBean.overridePassword)}"/>
+
+                                        <p:outputLabel value="First Name:" for="first_name"/>
+                                        <p:inputText id="first_name" value="#{user_detailBean.selected.first_name}" required="true" requiredMessage="First Name is required"/>
+                                        <p:outputLabel value="Second Name:" for="second_name"/>
+                                        <p:inputText id="second_name" value="#{user_detailBean.selected.second_name}" required="true" requiredMessage="Second Name is required"/>
+                                        <p:outputLabel value="Third Name:" for="third_name"/>
+                                        <p:inputText id="third_name" value="#{user_detailBean.selected.third_name}" required="false"/>
+                                        <p:outputLabel value="Is General Admin?:" for="is_user_gen_admin"/>
+                                        <p:selectOneMenu id="is_user_gen_admin" value="#{user_detailBean.selected.is_general_admin}" required="true" requiredMessage="Is general admin field is required">
+                                            <f:selectItem itemLabel="" itemValue=""/>
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Is Active?:" for="is_active2"/>
+                                        <p:selectOneMenu id="is_active2" value="#{user_detailBean.selected.is_active}" required="true" requiredMessage="Is active field is required">
+                                            <f:selectItem itemLabel="" itemValue=""/>
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="SAVE" icon="ui-icon-disk" action="#{user_detailBean.save_User_detail(loginBean.user_detail.user_detail_id)}" process="panel_detail1" update="main_form:main_accord_panel:panel_grid1 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" action="#{user_detailBean.cancel()}" icon="ui-icon-cancel" process="@this" update="main_form:main_accord_panel:panel_grid1 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="company_table" value="#{user_detailBean.ts}" var="item">
+                                        <p:column headerText="Username">
+                                            #{item.user_name}
+                                        </p:column>
+                                        <p:column headerText="First Name">
+                                            #{item.first_name}
+                                        </p:column>
+                                        <p:column headerText="Second Name">
+                                            #{item.second_name}
+                                        </p:column>
+                                        <p:column headerText="User Category">
+                                            #{item.user_category}
+                                        </p:column>
+                                        <p:column headerText="General Admin?">
+                                            #{generalUtilities.convertYesNo(item.is_general_admin)}
+                                        </p:column>
+                                        <p:column headerText="Active?">
+                                            #{generalUtilities.convertYesNo(item.is_active)}
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{user_detailBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid1 main_form:messages" icon="ui-icon-pencil" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Del" actionListener="#{user_detailBean.delete(item)}" update="main_form:main_accord_panel:panel_grid1 main_form:messages" process="@this" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab title="Entity Types" id="tab2">
+                                <p:panelGrid id="panel_grid2" columns="2">
+                                    <p:panelGrid id="panel_detail2" columns="2">
+                                        <p:outputLabel value="Group Name:" for="group_name"/>
+                                        <p:inputText id="group_name" value="#{group_detailBean.selected.group_name}" required="true" requiredMessage="Group Name is required"/>
+                                        <p:commandButton value="SAVE" action="#{group_detailBean.save_Group_detail(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail2" update="main_form:main_accord_panel:panel_grid2 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{group_detailBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid2 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="entity_type_table" value="#{group_detailBean.ts}" var="item">
+                                        <p:column headerText="Group Name">
+                                            <h:outputText value="#{item.group_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{group_detailBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid2 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{group_detailBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid2 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab3" title="Document Type">
+                                <p:panelGrid id="panel_grid3" columns="2">
+                                    <p:panelGrid id="panel_detail3" columns="2">
+                                        <p:outputLabel value="Group Name:" for="group_name3"/>
+                                        <p:selectOneMenu id="group_name3" value="#{group_rightBean.selected.group_detail}" style="width:125px" required="true" requiredMessage="Group Detail field is Required" converter="group_detailConverter">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{group_detailBean.ts}" var="item" itemLabel="#{item.group_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Function Name:" for="function_name"/>
+                                        <p:selectOneMenu id="function_name" value="#{group_rightBean.selected.function_name}" required="true" requiredMessage="Function Name field is Required">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="COMPANY" itemValue="COMPANY" />
+                                            <f:selectItem itemLabel="PROCESS" itemValue="PROCESS" />
+                                            <f:selectItem itemLabel="USER" itemValue="USER" />
+                                            <f:selectItem itemLabel="TASK" itemValue="TASK" />
+                                            <f:selectItem itemLabel="REPORT" itemValue="REPORT" />
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="View:" for="view"/>
+                                        <p:selectOneMenu id="view" value="#{group_rightBean.selected.allow_view}" required="true" requiredMessage="View field is required">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Add:" for="add"/>
+                                        <p:selectOneMenu id="add" value="#{group_rightBean.selected.allow_add}" required="true" requiredMessage="Add field is required">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Edit:" for="edit"/>
+                                        <p:selectOneMenu id="edit" value="#{group_rightBean.selected.allow_edit}" required="true" requiredMessage="Edit field is required">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Delete:" for="delete"/>
+                                        <p:selectOneMenu id="delete" value="#{group_rightBean.selected.allow_delete}" required="true" requiredMessage="Delete field is required">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="SAVE" action="#{group_rightBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail3" update="main_form:main_accord_panel:panel_grid3 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{group_rightBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid3 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="document_type_table" value="#{group_rightBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15,30,50,100">
+                                        <p:column headerText="Group Name">
+                                            <h:outputText value="#{item.group_detail.group_name}"/>
+                                        </p:column>
+                                        <p:column headerText="Function">
+                                            <h:outputText value="#{item.function_name}"/>
+                                        </p:column>
+                                        <p:column headerText="View?">
+                                            <h:outputText value="#{generalUtilities.convertYesNo(item.allow_view)}"/>
+                                        </p:column>
+                                        <p:column headerText="Add?">
+                                            <h:outputText value="#{generalUtilities.convertYesNo(item.allow_add)}"/>
+                                        </p:column>
+                                        <p:column headerText="Edit?">
+                                            <h:outputText value="#{generalUtilities.convertYesNo(item.allow_edit)}"/>
+                                        </p:column>
+                                        <p:column headerText="Delete?">
+                                            <h:outputText value="#{generalUtilities.convertYesNo(item.allow_delete)}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{group_rightBean.edit(item)}" icon="ui-icon-search" title="View" process="@this" update="main_form:main_accord_panel:panel_grid3 main_form:messages">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{group_rightBean.delete(item)}" icon="ui-icon-trash" process="@this" update="main_form:main_accord_panel:panel_grid3 main_form:messages">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>                
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab4" title="Data Element Category">
+                                <p:panelGrid id="panel_grid4" columns="2">
+                                    <p:panelGrid id="panel_detail4" columns="2">
+                                        <p:outputLabel value="Select Group:" for="group_name4"/>
+                                        <p:selectOneMenu id="group_name4" value="#{group_userBean.selected.group_detail}" style="width:125px" required="true" requiredMessage="Group Detail field is Required" converter="group_detailConverter">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{group_detailBean.ts}" var="item" itemLabel="#{item.group_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Select User:" for="user_detail4"/>
+                                        <p:selectOneMenu id="user_detail4" value="#{group_userBean.selected.user_detail}" style="width:125px" required="true" requiredMessage="User Detail field is Required" converter="user_detailConverter">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{user_detailBean.ts}" var="item" itemLabel="#{item.user_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="SAVE" action="#{group_userBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail4" update="main_form:main_accord_panel:panel_grid4 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{group_userBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid4 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="data_element_category_table" value="#{group_userBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15,30,50,100">
+                                        <p:column headerText="Group Name">
+                                            <h:outputText value="#{item.group_detail.group_name}"/>
+                                        </p:column>
+                                        <p:column headerText="User Name">
+                                            <h:outputText value="#{item.user_detail.user_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{group_userBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid4 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{group_userBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid4 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab5" title="Data Elements">
+                                <p:panelGrid id="panel_grid5" columns="2">
+                                    <p:panelGrid id="panel_detail5" columns="2">
+                                        
+                                        <p:commandButton value="SAVE" action="#{group_userBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail5" update="main_form:main_accord_panel:panel_grid5 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{group_userBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid5 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="data_elements_table" value="#{group_userBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15,30,50,100">
+                                        <p:column headerText="Group Name">
+                                            <h:outputText value="#{item.group_detail.group_name}"/>
+                                        </p:column>
+                                        <p:column headerText="User Name">
+                                            <h:outputText value="#{item.user_detail.user_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{group_userBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid5 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{group_userBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid5 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab6" title="Map Data Elements to Entity Types">
+                                <p:panelGrid id="panel_grid6" columns="2">
+                                    <p:panelGrid id="panel_detail6" columns="2">
+                                        
+                                        <p:commandButton value="SAVE" action="#{group_userBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail6" update="main_form:main_accord_panel:panel_grid6 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{group_userBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid6 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="data_elements_et_table" value="#{group_userBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15,30,50,100">
+                                        <p:column headerText="Group Name">
+                                            <h:outputText value="#{item.group_detail.group_name}"/>
+                                        </p:column>
+                                        <p:column headerText="User Name">
+                                            <h:outputText value="#{item.user_detail.user_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{group_userBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid6 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{group_userBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid6 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                        </p:accordionPanel>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -366,12 +366,12 @@ public class Entity_detail implements Serializable {
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
 			if(getData_element() != null) {
-				getData_element().getEntity().remove(this);
+				getData_element().getEntity_detail().remove(this);
 			}
 			
 			pwfms.Task[] lTasks = (pwfms.Task[])getTask().toArray(new pwfms.Task[getTask().size()]);
 			for(int i = 0; i < lTasks.length; i++) {
-				lTasks[i].setEntity_detail(null);
+				lTasks[i].setEntity(null);
 			}
 			return delete();
 		}
@@ -384,12 +384,12 @@ public class Entity_detail implements Serializable {
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
 			if(getData_element() != null) {
-				getData_element().getEntity().remove(this);
+				getData_element().getEntity_detail().remove(this);
 			}
 			
 			pwfms.Task[] lTasks = (pwfms.Task[])getTask().toArray(new pwfms.Task[getTask().size()]);
 			for(int i = 0; i < lTasks.length; i++) {
-				lTasks[i].setEntity_detail(null);
+				lTasks[i].setEntity(null);
 			}
 			try {
 				session.delete(this);
@@ -418,7 +418,7 @@ public class Entity_detail implements Serializable {
 	@Column(name="data_element_value", nullable=false, length=250)	
 	private String data_element_value;
 	
-	@OneToMany(mappedBy="entity_detail", targetEntity=pwfms.Task.class)	
+	@OneToMany(mappedBy="entity", targetEntity=pwfms.Task.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task = new java.util.HashSet();

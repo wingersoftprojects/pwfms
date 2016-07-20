@@ -21,8 +21,8 @@ import org.orm.criteria.*;
 public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression document_type_id;
 	public final StringExpression document_type_name;
-	public final IntegerExpression document_typeId;
-	public final AssociationExpression document_type;
+	public final IntegerExpression companyId;
+	public final AssociationExpression company;
 	public final CollectionExpression activity_document_type;
 	public final CollectionExpression task_document;
 	
@@ -30,8 +30,8 @@ public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		super(pwfms.Document_type.class, pwfms.Document_typeCriteria.class);
 		document_type_id = new IntegerExpression("document_type_id", this.getDetachedCriteria());
 		document_type_name = new StringExpression("document_type_name", this.getDetachedCriteria());
-		document_typeId = new IntegerExpression("document_type.company_id", this.getDetachedCriteria());
-		document_type = new AssociationExpression("document_type", this.getDetachedCriteria());
+		companyId = new IntegerExpression("company.company_id", this.getDetachedCriteria());
+		company = new AssociationExpression("company", this.getDetachedCriteria());
 		activity_document_type = new CollectionExpression("activity_document_type", this.getDetachedCriteria());
 		task_document = new CollectionExpression("task_document", this.getDetachedCriteria());
 	}
@@ -40,14 +40,14 @@ public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		super(aDetachedCriteria, pwfms.Document_typeCriteria.class);
 		document_type_id = new IntegerExpression("document_type_id", this.getDetachedCriteria());
 		document_type_name = new StringExpression("document_type_name", this.getDetachedCriteria());
-		document_typeId = new IntegerExpression("document_type.company_id", this.getDetachedCriteria());
-		document_type = new AssociationExpression("document_type", this.getDetachedCriteria());
+		companyId = new IntegerExpression("company.company_id", this.getDetachedCriteria());
+		company = new AssociationExpression("company", this.getDetachedCriteria());
 		activity_document_type = new CollectionExpression("activity_document_type", this.getDetachedCriteria());
 		task_document = new CollectionExpression("task_document", this.getDetachedCriteria());
 	}
 	
-	public CompanyDetachedCriteria createDocument_typeCriteria() {
-		return new CompanyDetachedCriteria(createCriteria("document_type"));
+	public CompanyDetachedCriteria createCompanyCriteria() {
+		return new CompanyDetachedCriteria(createCriteria("company"));
 	}
 	
 	public Activity_document_typeDetachedCriteria createActivity_document_typeCriteria() {

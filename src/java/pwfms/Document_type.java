@@ -365,8 +365,8 @@ public class Document_type implements Serializable {
 	
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
-			if(getDocument_type() != null) {
-				getDocument_type().getDocument_type().remove(this);
+			if(getCompany() != null) {
+				getCompany().getDocument_type().remove(this);
 			}
 			
 			pwfms.Activity_document_type[] lActivity_document_types = (pwfms.Activity_document_type[])getActivity_document_type().toArray(new pwfms.Activity_document_type[getActivity_document_type().size()]);
@@ -387,8 +387,8 @@ public class Document_type implements Serializable {
 	
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
-			if(getDocument_type() != null) {
-				getDocument_type().getDocument_type().remove(this);
+			if(getCompany() != null) {
+				getCompany().getDocument_type().remove(this);
 			}
 			
 			pwfms.Activity_document_type[] lActivity_document_types = (pwfms.Activity_document_type[])getActivity_document_type().toArray(new pwfms.Activity_document_type[getActivity_document_type().size()]);
@@ -424,7 +424,7 @@ public class Document_type implements Serializable {
 	@ManyToOne(targetEntity=pwfms.Company.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="company_id", referencedColumnName="company_id", nullable=false) })	
-	private pwfms.Company document_type;
+	private pwfms.Company company;
 	
 	@OneToMany(mappedBy="document_type", targetEntity=pwfms.Activity_document_type.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -435,14 +435,6 @@ public class Document_type implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task_document = new java.util.HashSet();
-	
-	public void setDocument_type_name(String value) {
-		this.document_type_name = value;
-	}
-	
-	public String getDocument_type_name() {
-		return document_type_name;
-	}
 	
 	private void setDocument_type_id(int value) {
 		this.document_type_id = value;
@@ -456,12 +448,20 @@ public class Document_type implements Serializable {
 		return getDocument_type_id();
 	}
 	
-	public void setDocument_type(pwfms.Company value) {
-		this.document_type = value;
+	public void setDocument_type_name(String value) {
+		this.document_type_name = value;
 	}
 	
-	public pwfms.Company getDocument_type() {
-		return document_type;
+	public String getDocument_type_name() {
+		return document_type_name;
+	}
+	
+	public void setCompany(pwfms.Company value) {
+		this.company = value;
+	}
+	
+	public pwfms.Company getCompany() {
+		return company;
 	}
 	
 	public void setActivity_document_type(java.util.Set value) {
@@ -481,9 +481,6 @@ public class Document_type implements Serializable {
 		return task_document;
 	}
 	
-	
-	@Transient	
-	private Integer company_id;
 	
 	public String toString() {
 		return String.valueOf(getDocument_type_id());

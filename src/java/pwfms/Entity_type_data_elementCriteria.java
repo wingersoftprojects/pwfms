@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class Entity_type_data_elementCriteria extends AbstractORMCriteria {
-	public final IntegerExpression entity_type_data_element;
+	public final IntegerExpression entity_type_data_element_id;
 	public final IntegerExpression entity_typeId;
 	public final AssociationExpression entity_type;
 	public final IntegerExpression data_elementId;
@@ -28,7 +28,7 @@ public class Entity_type_data_elementCriteria extends AbstractORMCriteria {
 	
 	public Entity_type_data_elementCriteria(Criteria criteria) {
 		super(criteria);
-		entity_type_data_element = new IntegerExpression("entity_type_data_element", this);
+		entity_type_data_element_id = new IntegerExpression("entity_type_data_element_id", this);
 		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this);
 		entity_type = new AssociationExpression("entity_type", this);
 		data_elementId = new IntegerExpression("data_element.data_element_id", this);

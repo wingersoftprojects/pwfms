@@ -33,7 +33,7 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final AssociationExpression data_element_category;
 	public final CollectionExpression activity_data_element;
 	public final CollectionExpression entity_type_data_element;
-	public final CollectionExpression entity;
+	public final CollectionExpression entity_detail;
 	public final CollectionExpression task_data_element;
 	
 	public Data_elementDetachedCriteria() {
@@ -52,7 +52,7 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 		data_element_category = new AssociationExpression("data_element_category", this.getDetachedCriteria());
 		activity_data_element = new CollectionExpression("activity_data_element", this.getDetachedCriteria());
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this.getDetachedCriteria());
-		entity = new CollectionExpression("entity", this.getDetachedCriteria());
+		entity_detail = new CollectionExpression("entity_detail", this.getDetachedCriteria());
 		task_data_element = new CollectionExpression("task_data_element", this.getDetachedCriteria());
 	}
 	
@@ -72,7 +72,7 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 		data_element_category = new AssociationExpression("data_element_category", this.getDetachedCriteria());
 		activity_data_element = new CollectionExpression("activity_data_element", this.getDetachedCriteria());
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this.getDetachedCriteria());
-		entity = new CollectionExpression("entity", this.getDetachedCriteria());
+		entity_detail = new CollectionExpression("entity_detail", this.getDetachedCriteria());
 		task_data_element = new CollectionExpression("task_data_element", this.getDetachedCriteria());
 	}
 	
@@ -92,8 +92,8 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new Entity_type_data_elementDetachedCriteria(createCriteria("entity_type_data_element"));
 	}
 	
-	public Entity_detailDetachedCriteria createEntityCriteria() {
-		return new Entity_detailDetachedCriteria(createCriteria("entity"));
+	public Entity_detailDetachedCriteria createEntity_detailCriteria() {
+		return new Entity_detailDetachedCriteria(createCriteria("entity_detail"));
 	}
 	
 	public Task_data_elementDetachedCriteria createTask_data_elementCriteria() {

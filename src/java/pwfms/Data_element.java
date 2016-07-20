@@ -381,9 +381,9 @@ public class Data_element implements Serializable {
 			for(int i = 0; i < lEntity_type_data_elements.length; i++) {
 				lEntity_type_data_elements[i].setData_element(null);
 			}
-			pwfms.Entity_detail[] lEntitys = (pwfms.Entity_detail[])getEntity().toArray(new pwfms.Entity_detail[getEntity().size()]);
-			for(int i = 0; i < lEntitys.length; i++) {
-				lEntitys[i].setData_element(null);
+			pwfms.Entity_detail[] lEntity_details = (pwfms.Entity_detail[])getEntity_detail().toArray(new pwfms.Entity_detail[getEntity_detail().size()]);
+			for(int i = 0; i < lEntity_details.length; i++) {
+				lEntity_details[i].setData_element(null);
 			}
 			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
 			for(int i = 0; i < lTask_data_elements.length; i++) {
@@ -415,9 +415,9 @@ public class Data_element implements Serializable {
 			for(int i = 0; i < lEntity_type_data_elements.length; i++) {
 				lEntity_type_data_elements[i].setData_element(null);
 			}
-			pwfms.Entity_detail[] lEntitys = (pwfms.Entity_detail[])getEntity().toArray(new pwfms.Entity_detail[getEntity().size()]);
-			for(int i = 0; i < lEntitys.length; i++) {
-				lEntitys[i].setData_element(null);
+			pwfms.Entity_detail[] lEntity_details = (pwfms.Entity_detail[])getEntity_detail().toArray(new pwfms.Entity_detail[getEntity_detail().size()]);
+			for(int i = 0; i < lEntity_details.length; i++) {
+				lEntity_details[i].setData_element(null);
 			}
 			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
 			for(int i = 0; i < lTask_data_elements.length; i++) {
@@ -486,7 +486,7 @@ public class Data_element implements Serializable {
 	@OneToMany(mappedBy="data_element", targetEntity=pwfms.Entity_detail.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set entity = new java.util.HashSet();
+	private java.util.Set entity_detail = new java.util.HashSet();
 	
 	@OneToMany(mappedBy="data_element", targetEntity=pwfms.Task_data_element.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -595,12 +595,12 @@ public class Data_element implements Serializable {
 	}
 	
 	
-	public void setEntity(java.util.Set value) {
-		this.entity = value;
+	public void setEntity_detail(java.util.Set value) {
+		this.entity_detail = value;
 	}
 	
-	public java.util.Set getEntity() {
-		return entity;
+	public java.util.Set getEntity_detail() {
+		return entity_detail;
 	}
 	
 	

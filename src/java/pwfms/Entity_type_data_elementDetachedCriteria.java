@@ -19,7 +19,7 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class Entity_type_data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
-	public final IntegerExpression entity_type_data_element;
+	public final IntegerExpression entity_type_data_element_id;
 	public final IntegerExpression entity_typeId;
 	public final AssociationExpression entity_type;
 	public final IntegerExpression data_elementId;
@@ -28,7 +28,7 @@ public class Entity_type_data_elementDetachedCriteria extends AbstractORMDetache
 	
 	public Entity_type_data_elementDetachedCriteria() {
 		super(pwfms.Entity_type_data_element.class, pwfms.Entity_type_data_elementCriteria.class);
-		entity_type_data_element = new IntegerExpression("entity_type_data_element", this.getDetachedCriteria());
+		entity_type_data_element_id = new IntegerExpression("entity_type_data_element_id", this.getDetachedCriteria());
 		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this.getDetachedCriteria());
 		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
 		data_elementId = new IntegerExpression("data_element.data_element_id", this.getDetachedCriteria());
@@ -38,7 +38,7 @@ public class Entity_type_data_elementDetachedCriteria extends AbstractORMDetache
 	
 	public Entity_type_data_elementDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, pwfms.Entity_type_data_elementCriteria.class);
-		entity_type_data_element = new IntegerExpression("entity_type_data_element", this.getDetachedCriteria());
+		entity_type_data_element_id = new IntegerExpression("entity_type_data_element_id", this.getDetachedCriteria());
 		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this.getDetachedCriteria());
 		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
 		data_elementId = new IntegerExpression("data_element.data_element_id", this.getDetachedCriteria());

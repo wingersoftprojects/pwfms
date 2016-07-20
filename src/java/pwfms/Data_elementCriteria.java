@@ -33,7 +33,7 @@ public class Data_elementCriteria extends AbstractORMCriteria {
 	public final AssociationExpression data_element_category;
 	public final CollectionExpression activity_data_element;
 	public final CollectionExpression entity_type_data_element;
-	public final CollectionExpression entity;
+	public final CollectionExpression entity_detail;
 	public final CollectionExpression task_data_element;
 	
 	public Data_elementCriteria(Criteria criteria) {
@@ -52,7 +52,7 @@ public class Data_elementCriteria extends AbstractORMCriteria {
 		data_element_category = new AssociationExpression("data_element_category", this);
 		activity_data_element = new CollectionExpression("activity_data_element", this);
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this);
-		entity = new CollectionExpression("entity", this);
+		entity_detail = new CollectionExpression("entity_detail", this);
 		task_data_element = new CollectionExpression("task_data_element", this);
 	}
 	
@@ -80,8 +80,8 @@ public class Data_elementCriteria extends AbstractORMCriteria {
 		return new Entity_type_data_elementCriteria(createCriteria("entity_type_data_element"));
 	}
 	
-	public Entity_detailCriteria createEntityCriteria() {
-		return new Entity_detailCriteria(createCriteria("entity"));
+	public Entity_detailCriteria createEntity_detailCriteria() {
+		return new Entity_detailCriteria(createCriteria("entity_detail"));
 	}
 	
 	public Task_data_elementCriteria createTask_data_elementCriteria() {

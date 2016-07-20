@@ -35,8 +35,8 @@ public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final DateExpression flag_date;
 	public final IntegerExpression outcomeId;
 	public final AssociationExpression outcome;
-	public final IntegerExpression entity_detailId;
-	public final AssociationExpression entity_detail;
+	public final IntegerExpression entityId;
+	public final AssociationExpression entity;
 	public final StringExpression comment;
 	public final CollectionExpression task_data_element;
 	public final CollectionExpression task_document;
@@ -59,8 +59,8 @@ public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 		flag_date = new DateExpression("flag_date", this.getDetachedCriteria());
 		outcomeId = new IntegerExpression("outcome.outcome_id", this.getDetachedCriteria());
 		outcome = new AssociationExpression("outcome", this.getDetachedCriteria());
-		entity_detailId = new IntegerExpression("entity_detail.entity_detail_id", this.getDetachedCriteria());
-		entity_detail = new AssociationExpression("entity_detail", this.getDetachedCriteria());
+		entityId = new IntegerExpression("entity.entity_detail_id", this.getDetachedCriteria());
+		entity = new AssociationExpression("entity", this.getDetachedCriteria());
 		comment = new StringExpression("comment", this.getDetachedCriteria());
 		task_data_element = new CollectionExpression("task_data_element", this.getDetachedCriteria());
 		task_document = new CollectionExpression("task_document", this.getDetachedCriteria());
@@ -84,8 +84,8 @@ public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 		flag_date = new DateExpression("flag_date", this.getDetachedCriteria());
 		outcomeId = new IntegerExpression("outcome.outcome_id", this.getDetachedCriteria());
 		outcome = new AssociationExpression("outcome", this.getDetachedCriteria());
-		entity_detailId = new IntegerExpression("entity_detail.entity_detail_id", this.getDetachedCriteria());
-		entity_detail = new AssociationExpression("entity_detail", this.getDetachedCriteria());
+		entityId = new IntegerExpression("entity.entity_detail_id", this.getDetachedCriteria());
+		entity = new AssociationExpression("entity", this.getDetachedCriteria());
 		comment = new StringExpression("comment", this.getDetachedCriteria());
 		task_data_element = new CollectionExpression("task_data_element", this.getDetachedCriteria());
 		task_document = new CollectionExpression("task_document", this.getDetachedCriteria());
@@ -111,8 +111,8 @@ public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new OutcomeDetachedCriteria(createCriteria("outcome"));
 	}
 	
-	public Entity_detailDetachedCriteria createEntity_detailCriteria() {
-		return new Entity_detailDetachedCriteria(createCriteria("entity_detail"));
+	public Entity_detailDetachedCriteria createEntityCriteria() {
+		return new Entity_detailDetachedCriteria(createCriteria("entity"));
 	}
 	
 	public Task_data_elementDetachedCriteria createTask_data_elementCriteria() {

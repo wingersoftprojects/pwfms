@@ -333,7 +333,7 @@
     </Column>
   </Entity>
   <Entity name="entity_type_data_element" PKClustered="0">
-    <Column name="entity_type_data_element">
+    <Column name="entity_type_data_element_id">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>

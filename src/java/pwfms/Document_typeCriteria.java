@@ -21,8 +21,8 @@ import org.orm.criteria.*;
 public class Document_typeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression document_type_id;
 	public final StringExpression document_type_name;
-	public final IntegerExpression document_typeId;
-	public final AssociationExpression document_type;
+	public final IntegerExpression companyId;
+	public final AssociationExpression company;
 	public final CollectionExpression activity_document_type;
 	public final CollectionExpression task_document;
 	
@@ -30,8 +30,8 @@ public class Document_typeCriteria extends AbstractORMCriteria {
 		super(criteria);
 		document_type_id = new IntegerExpression("document_type_id", this);
 		document_type_name = new StringExpression("document_type_name", this);
-		document_typeId = new IntegerExpression("document_type.company_id", this);
-		document_type = new AssociationExpression("document_type", this);
+		companyId = new IntegerExpression("company.company_id", this);
+		company = new AssociationExpression("company", this);
 		activity_document_type = new CollectionExpression("activity_document_type", this);
 		task_document = new CollectionExpression("task_document", this);
 	}
@@ -44,8 +44,8 @@ public class Document_typeCriteria extends AbstractORMCriteria {
 		this(pwfms.PWFMPersistentManager.instance().getSession());
 	}
 	
-	public CompanyCriteria createDocument_typeCriteria() {
-		return new CompanyCriteria(createCriteria("document_type"));
+	public CompanyCriteria createCompanyCriteria() {
+		return new CompanyCriteria(createCriteria("company"));
 	}
 	
 	public Activity_document_typeCriteria createActivity_document_typeCriteria() {

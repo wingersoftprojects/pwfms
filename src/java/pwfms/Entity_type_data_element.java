@@ -27,10 +27,10 @@ public class Entity_type_data_element implements Serializable {
 	public Entity_type_data_element() {
 	}
 	
-	public static Entity_type_data_element loadEntity_type_data_elementByORMID(int entity_type_data_element) throws PersistentException {
+	public static Entity_type_data_element loadEntity_type_data_elementByORMID(int entity_type_data_element_id) throws PersistentException {
 		try {
 			PersistentSession session = pwfms.PWFMPersistentManager.instance().getSession();
-			return loadEntity_type_data_elementByORMID(session, entity_type_data_element);
+			return loadEntity_type_data_elementByORMID(session, entity_type_data_element_id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -38,10 +38,10 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	public static Entity_type_data_element getEntity_type_data_elementByORMID(int entity_type_data_element) throws PersistentException {
+	public static Entity_type_data_element getEntity_type_data_elementByORMID(int entity_type_data_element_id) throws PersistentException {
 		try {
 			PersistentSession session = pwfms.PWFMPersistentManager.instance().getSession();
-			return getEntity_type_data_elementByORMID(session, entity_type_data_element);
+			return getEntity_type_data_elementByORMID(session, entity_type_data_element_id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -49,10 +49,10 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	public static Entity_type_data_element loadEntity_type_data_elementByORMID(int entity_type_data_element, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Entity_type_data_element loadEntity_type_data_elementByORMID(int entity_type_data_element_id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = pwfms.PWFMPersistentManager.instance().getSession();
-			return loadEntity_type_data_elementByORMID(session, entity_type_data_element, lockMode);
+			return loadEntity_type_data_elementByORMID(session, entity_type_data_element_id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -60,10 +60,10 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	public static Entity_type_data_element getEntity_type_data_elementByORMID(int entity_type_data_element, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Entity_type_data_element getEntity_type_data_elementByORMID(int entity_type_data_element_id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
 			PersistentSession session = pwfms.PWFMPersistentManager.instance().getSession();
-			return getEntity_type_data_elementByORMID(session, entity_type_data_element, lockMode);
+			return getEntity_type_data_elementByORMID(session, entity_type_data_element_id, lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -71,9 +71,9 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	public static Entity_type_data_element loadEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element) throws PersistentException {
+	public static Entity_type_data_element loadEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element_id) throws PersistentException {
 		try {
-			return (Entity_type_data_element) session.load(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element));
+			return (Entity_type_data_element) session.load(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element_id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -81,9 +81,9 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	public static Entity_type_data_element getEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element) throws PersistentException {
+	public static Entity_type_data_element getEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element_id) throws PersistentException {
 		try {
-			return (Entity_type_data_element) session.get(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element));
+			return (Entity_type_data_element) session.get(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element_id));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -91,9 +91,9 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	public static Entity_type_data_element loadEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Entity_type_data_element loadEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element_id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Entity_type_data_element) session.load(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element), lockMode);
+			return (Entity_type_data_element) session.load(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element_id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -101,9 +101,9 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	public static Entity_type_data_element getEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element, org.hibernate.LockMode lockMode) throws PersistentException {
+	public static Entity_type_data_element getEntity_type_data_elementByORMID(PersistentSession session, int entity_type_data_element_id, org.hibernate.LockMode lockMode) throws PersistentException {
 		try {
-			return (Entity_type_data_element) session.get(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element), lockMode);
+			return (Entity_type_data_element) session.get(pwfms.Entity_type_data_element.class, new Integer(entity_type_data_element_id), lockMode);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -404,11 +404,11 @@ public class Entity_type_data_element implements Serializable {
 		}
 	}
 	
-	@Column(name="entity_type_data_element", nullable=false, length=11)	
+	@Column(name="entity_type_data_element_id", nullable=false, length=11)	
 	@Id	
-	@GeneratedValue(generator="PWFMS_ENTITY_TYPE_DATA_ELEMENT_ENTITY_TYPE_DATA_ELEMENT_GENERATOR")	
-	@org.hibernate.annotations.GenericGenerator(name="PWFMS_ENTITY_TYPE_DATA_ELEMENT_ENTITY_TYPE_DATA_ELEMENT_GENERATOR", strategy="native")	
-	private int entity_type_data_element;
+	@GeneratedValue(generator="PWFMS_ENTITY_TYPE_DATA_ELEMENT_ENTITY_TYPE_DATA_ELEMENT_ID_GENERATOR")	
+	@org.hibernate.annotations.GenericGenerator(name="PWFMS_ENTITY_TYPE_DATA_ELEMENT_ENTITY_TYPE_DATA_ELEMENT_ID_GENERATOR", strategy="native")	
+	private int entity_type_data_element_id;
 	
 	@ManyToOne(targetEntity=pwfms.Entity_type.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
@@ -423,16 +423,16 @@ public class Entity_type_data_element implements Serializable {
 	@Column(name="is_mandatory", nullable=false, length=1)	
 	private int is_mandatory;
 	
-	private void setEntity_type_data_element(int value) {
-		this.entity_type_data_element = value;
+	private void setEntity_type_data_element_id(int value) {
+		this.entity_type_data_element_id = value;
 	}
 	
-	public int getEntity_type_data_element() {
-		return entity_type_data_element;
+	public int getEntity_type_data_element_id() {
+		return entity_type_data_element_id;
 	}
 	
 	public int getORMID() {
-		return getEntity_type_data_element();
+		return getEntity_type_data_element_id();
 	}
 	
 	public void setIs_mandatory(int value) {
@@ -460,7 +460,7 @@ public class Entity_type_data_element implements Serializable {
 	}
 	
 	public String toString() {
-		return String.valueOf(getEntity_type_data_element());
+		return String.valueOf(getEntity_type_data_element_id());
 	}
 	
 }

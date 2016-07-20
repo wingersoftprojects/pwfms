@@ -214,7 +214,6 @@ public abstract class AbstractBean<T> {
     }
 
     public void save(int aUserDetailId) {
-        //no paramater
         Class noparams[] = {};
 
         try {

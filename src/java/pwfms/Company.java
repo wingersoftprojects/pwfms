@@ -371,7 +371,7 @@ public class Company implements Serializable {
 			}
 			pwfms.Document_type[] lDocument_types = (pwfms.Document_type[])getDocument_type().toArray(new pwfms.Document_type[getDocument_type().size()]);
 			for(int i = 0; i < lDocument_types.length; i++) {
-				lDocument_types[i].setDocument_type(null);
+				lDocument_types[i].setCompany(null);
 			}
 			pwfms.User_detail[] lUser_details = (pwfms.User_detail[])getUser_detail().toArray(new pwfms.User_detail[getUser_detail().size()]);
 			for(int i = 0; i < lUser_details.length; i++) {
@@ -413,7 +413,7 @@ public class Company implements Serializable {
 			}
 			pwfms.Document_type[] lDocument_types = (pwfms.Document_type[])getDocument_type().toArray(new pwfms.Document_type[getDocument_type().size()]);
 			for(int i = 0; i < lDocument_types.length; i++) {
-				lDocument_types[i].setDocument_type(null);
+				lDocument_types[i].setCompany(null);
 			}
 			pwfms.User_detail[] lUser_details = (pwfms.User_detail[])getUser_detail().toArray(new pwfms.User_detail[getUser_detail().size()]);
 			for(int i = 0; i < lUser_details.length; i++) {
@@ -478,7 +478,7 @@ public class Company implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set process = new java.util.HashSet();
 	
-	@OneToMany(mappedBy="document_type", targetEntity=pwfms.Document_type.class)	
+	@OneToMany(mappedBy="company", targetEntity=pwfms.Document_type.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set document_type = new java.util.HashSet();

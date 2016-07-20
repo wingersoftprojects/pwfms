@@ -385,8 +385,8 @@ public class Task implements Serializable {
 				getOutcome().getTask().remove(this);
 			}
 			
-			if(getEntity_detail() != null) {
-				getEntity_detail().getTask().remove(this);
+			if(getEntity() != null) {
+				getEntity().getTask().remove(this);
 			}
 			
 			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
@@ -427,8 +427,8 @@ public class Task implements Serializable {
 				getOutcome().getTask().remove(this);
 			}
 			
-			if(getEntity_detail() != null) {
-				getEntity_detail().getTask().remove(this);
+			if(getEntity() != null) {
+				getEntity().getTask().remove(this);
 			}
 			
 			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
@@ -506,7 +506,7 @@ public class Task implements Serializable {
 	@ManyToOne(targetEntity=pwfms.Entity_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="entity_id", referencedColumnName="entity_detail_id", nullable=false) })	
-	private pwfms.Entity_detail entity_detail;
+	private pwfms.Entity_detail entity;
 	
 	@Column(name="comment", nullable=true, length=250)	
 	private String comment;
@@ -621,12 +621,12 @@ public class Task implements Serializable {
 		return outcome;
 	}
 	
-	public void setEntity_detail(pwfms.Entity_detail value) {
-		this.entity_detail = value;
+	public void setEntity(pwfms.Entity_detail value) {
+		this.entity = value;
 	}
 	
-	public pwfms.Entity_detail getEntity_detail() {
-		return entity_detail;
+	public pwfms.Entity_detail getEntity() {
+		return entity;
 	}
 	
 	public void setTask_data_element(java.util.Set value) {

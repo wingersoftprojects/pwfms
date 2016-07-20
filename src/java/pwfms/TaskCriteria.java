@@ -35,8 +35,8 @@ public class TaskCriteria extends AbstractORMCriteria {
 	public final DateExpression flag_date;
 	public final IntegerExpression outcomeId;
 	public final AssociationExpression outcome;
-	public final IntegerExpression entity_detailId;
-	public final AssociationExpression entity_detail;
+	public final IntegerExpression entityId;
+	public final AssociationExpression entity;
 	public final StringExpression comment;
 	public final CollectionExpression task_data_element;
 	public final CollectionExpression task_document;
@@ -59,8 +59,8 @@ public class TaskCriteria extends AbstractORMCriteria {
 		flag_date = new DateExpression("flag_date", this);
 		outcomeId = new IntegerExpression("outcome.outcome_id", this);
 		outcome = new AssociationExpression("outcome", this);
-		entity_detailId = new IntegerExpression("entity_detail.entity_detail_id", this);
-		entity_detail = new AssociationExpression("entity_detail", this);
+		entityId = new IntegerExpression("entity.entity_detail_id", this);
+		entity = new AssociationExpression("entity", this);
 		comment = new StringExpression("comment", this);
 		task_data_element = new CollectionExpression("task_data_element", this);
 		task_document = new CollectionExpression("task_document", this);
@@ -94,8 +94,8 @@ public class TaskCriteria extends AbstractORMCriteria {
 		return new OutcomeCriteria(createCriteria("outcome"));
 	}
 	
-	public Entity_detailCriteria createEntity_detailCriteria() {
-		return new Entity_detailCriteria(createCriteria("entity_detail"));
+	public Entity_detailCriteria createEntityCriteria() {
+		return new Entity_detailCriteria(createCriteria("entity"));
 	}
 	
 	public Task_data_elementCriteria createTask_data_elementCriteria() {

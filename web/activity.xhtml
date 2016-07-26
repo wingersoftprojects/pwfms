@@ -29,6 +29,14 @@
                     <f:event listener="#{processBean.initializelist()}" type="preRenderView" />
                     <f:event listener="#{activityBean.init()}" type="preRenderView" />
                     <f:event listener="#{activityBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{activity_outcomeBean.init()}" type="preRenderView" />
+                    <f:event listener="#{activity_outcomeBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{activity_document_typeBean.init()}" type="preRenderView" />
+                    <f:event listener="#{activity_document_typeBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{sectionBean.init()}" type="preRenderView" />
+                    <f:event listener="#{sectionBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{activity_data_elementBean.init()}" type="preRenderView" />
+                    <f:event listener="#{activity_data_elementBean.initializelist()}" type="preRenderView" />
                 </f:metadata>
             </ui:define>
             <ui:define name="content">
@@ -101,7 +109,7 @@
                                         </p:commandButton>
                                         <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{activityBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid2 main_form:messages"/>
                                     </p:panelGrid>
-                                    <p:dataTable id="activity_table" value="#{activityBean.ts}" var="item" rows="10"
+                                    <p:dataTable id="data_table2" value="#{activityBean.ts}" var="item" rows="10"
                                                  paginator="true"
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="2,10,12,30,20,100">
@@ -115,6 +123,196 @@
                                             <p:commandButton value="Edit" action="#{activityBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid2 main_form:messages" icon="ui-icon-search" title="View">
                                             </p:commandButton>
                                             <p:commandButton value="Delete" actionListener="#{activityBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid2 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab3" title="Activity Outcome">
+                                <p:panelGrid id="panel_grid3" columns="2">
+                                    <p:panelGrid id="panel_detail3" columns="2">
+                                        <p:outputLabel value="Activity:" for="activity3"/>
+                                        <p:selectOneMenu id="activity3" value="#{activity_outcomeBean.selected.activity}" style="width:125px" converter="activityConverter" rendered="true" requiredMessage="Activity is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{activityBean.ts}" var="item" itemLabel="#{item.activity_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Outcome:" for="outcome3"/>
+                                        <p:selectOneMenu id="outcome3" value="#{activity_outcomeBean.selected.outcome}" style="width:125px" converter="outcomeConverter" rendered="true" requiredMessage="Outcome is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{outcomeBean.ts}" var="item" itemLabel="#{item.outcome_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="SAVE" action="#{activity_outcomeBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail3" update="main_form:main_accord_panel:panel_grid3 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{activity_outcomeBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid3 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="data_table3" value="#{activity_outcomeBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="2,10,12,30,20,100">
+                                        <p:column headerText="Activity">
+                                            <h:outputText value="#{item.activity.activity_name}"/>
+                                        </p:column>
+                                        <p:column headerText="Outcome">
+                                            <h:outputText value="#{item.outcome.outcome_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{activity_outcomeBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid3 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{activity_outcomeBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid3 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab4" title="Activity Document Type">
+                                <p:panelGrid id="panel_grid4" columns="2">
+                                    <p:panelGrid id="panel_detail4" columns="2">
+                                        <p:outputLabel value="Activity:" for="activity4"/>
+                                        <p:selectOneMenu id="activity4" value="#{activity_document_typeBean.selected.activity}" style="width:125px" converter="activityConverter" rendered="true" requiredMessage="Activity is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{activityBean.ts}" var="item" itemLabel="#{item.activity_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Document Type:" for="document_type4"/>
+                                        <p:selectOneMenu id="document_type4" value="#{activity_document_typeBean.selected.document_type}" style="width:125px" converter="document_typeConverter" rendered="true" requiredMessage="Document_type is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{document_typeBean.ts}" var="item" itemLabel="#{item.document_type_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Is Mandatory?:" for="is_mandatory"/>
+                                        <p:selectOneMenu id="is_mandatory" value="#{activity_document_typeBean.selected.is_mandatory}" required="true" requiredMessage="Is Mandatory field is required">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="SAVE" action="#{activity_document_typeBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail4" update="main_form:main_accord_panel:panel_grid4 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{activity_document_typeBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid4 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="data_table4" value="#{activity_document_typeBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="2,10,12,40,20,100">
+                                        <p:column headerText="Activity">
+                                            <h:outputText value="#{item.activity.activity_name}"/>
+                                        </p:column>
+                                        <p:column headerText="Document Type">
+                                            <h:outputText value="#{item.document_type.document_type_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{activity_document_typeBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid4 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{activity_document_typeBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid4 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab5" title="Activity Section">
+                                <p:panelGrid id="panel_grid5" columns="2">
+                                    <p:panelGrid id="panel_detail5" columns="2">
+                                        <p:outputLabel value="Activity:" for="activity5"/>
+                                        <p:selectOneMenu id="activity5" value="#{sectionBean.selected.activity}" style="width:125px" converter="activityConverter" rendered="true" requiredMessage="Activity is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{activityBean.ts}" var="item" itemLabel="#{item.activity_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Section Name:" for="section_name"/>
+                                        <p:inputText id="section_name" value="#{sectionBean.selected.section_name}" required="true" requiredMessage="Section name field is Required"/>
+                                        <p:outputLabel value="Section Order:" for="section_order"/>
+                                        <p:inputText id="section_order" value="#{sectionBean.selected.section_order}" required="true" requiredMessage="Section order field is Required"/>
+                                        <p:commandButton value="SAVE" action="#{sectionBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail5" update="main_form:main_accord_panel:panel_grid5 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{sectionBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid5 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="data_table5" value="#{sectionBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="2,10,12,50,20,100">
+                                        <p:column headerText="Activity">
+                                            <h:outputText value="#{item.activity.activity_name}"/>
+                                        </p:column>
+                                        <p:column headerText="Section">
+                                            <h:outputText value="#{item.section_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{sectionBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid5 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{sectionBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid5 main_form:messages" icon="ui-icon-trash">
+                                                <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                            </p:commandButton>
+
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                            </p:confirmDialog>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:tab>
+                            <p:tab id="tab6" title="Activity Data Element">
+                                <p:panelGrid id="panel_grid6" columns="2">
+                                    <p:panelGrid id="panel_detail6" columns="2">
+                                        <p:outputLabel value="Activity:" for="activity6"/>
+                                        <p:selectOneMenu id="activity6" value="#{activity_data_elementBean.selected.activity}" style="width:126px" converter="activityConverter" rendered="true" requiredMessage="Activity is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{activityBean.ts}" var="item" itemLabel="#{item.activity_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Data Element:" for="data_element6"/>
+                                        <p:selectOneMenu id="data_element6" value="#{activity_data_elementBean.selected.data_element}" style="width:126px" converter="data_elementConverter" rendered="true" requiredMessage="Data_element is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{data_elementBean.ts}" var="item" itemLabel="#{item.data_element_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Section:" for="section6"/>
+                                        <p:selectOneMenu id="section6" value="#{activity_data_elementBean.selected.section}" style="width:126px" converter="sectionConverter" rendered="true" requiredMessage="Section is required">
+                                            <f:selectItem itemLabel="" />
+                                            <f:selectItems value="#{sectionBean.ts}" var="item" itemLabel="#{item.section_name}" itemValue="#{item}"/>
+                                            <p:ajax process="@this"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Data Element Order:" for="data_element_order"/>
+                                        <p:inputText id="data_element_order" value="#{activity_data_elementBean.selected.data_element_order}" required="true" requiredMessage="Activity Data Element Order field is Required"/>
+                                        <p:outputLabel value="Is Mandatory?:" for="is_mandatory6"/>
+                                        <p:selectOneMenu id="is_mandatory6" value="#{activity_data_elementBean.selected.is_mandatory}" required="true" requiredMessage="Is Mandatory field is required">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="Yes" itemValue="1" />
+                                            <f:selectItem itemLabel="No" itemValue="0" />
+                                        </p:selectOneMenu>
+                                        <p:commandButton value="SAVE" action="#{activity_data_elementBean.save(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail6" update="main_form:main_accord_panel:panel_grid6 main_form:messages"/>
+                                        <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{activity_data_elementBean.cancel()}" process="@this" update="main_form:main_accord_panel:panel_grid6 main_form:messages"/>
+                                    </p:panelGrid>
+                                    <p:dataTable id="data_table6" value="#{activity_data_elementBean.ts}" var="item" rows="10"
+                                                 paginator="true"
+                                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="2,10,12,60,20,100">
+                                        <p:column headerText="Activity">
+                                            <h:outputText value="#{item.activity.activity_name}"/>
+                                        </p:column>
+                                        <p:column headerText="Data Element">
+                                            <h:outputText value="#{item.data_element.data_element_name}"/>
+                                        </p:column>
+                                        <p:column headerText="">
+                                            <p:commandButton value="Edit" action="#{activity_data_elementBean.edit(item)}" process="@this" update="main_form:main_accord_panel:panel_grid6 main_form:messages" icon="ui-icon-search" title="View">
+                                            </p:commandButton>
+                                            <p:commandButton value="Delete" actionListener="#{activity_data_elementBean.delete(item)}" process="@this" update="main_form:main_accord_panel:panel_grid6 main_form:messages" icon="ui-icon-trash">
                                                 <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
                                             </p:commandButton>
 

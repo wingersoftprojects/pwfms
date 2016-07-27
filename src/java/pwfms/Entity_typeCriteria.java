@@ -25,6 +25,8 @@ public class Entity_typeCriteria extends AbstractORMCriteria {
 	public final AssociationExpression company;
 	public final CollectionExpression activity_entity_type;
 	public final CollectionExpression entity_type_data_element;
+	public final CollectionExpression entity_detail;
+	public final CollectionExpression task_activity;
 	
 	public Entity_typeCriteria(Criteria criteria) {
 		super(criteria);
@@ -34,6 +36,8 @@ public class Entity_typeCriteria extends AbstractORMCriteria {
 		company = new AssociationExpression("company", this);
 		activity_entity_type = new CollectionExpression("activity_entity_type", this);
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this);
+		entity_detail = new CollectionExpression("entity_detail", this);
+		task_activity = new CollectionExpression("task_activity", this);
 	}
 	
 	public Entity_typeCriteria(PersistentSession session) {
@@ -54,6 +58,14 @@ public class Entity_typeCriteria extends AbstractORMCriteria {
 	
 	public Entity_type_data_elementCriteria createEntity_type_data_elementCriteria() {
 		return new Entity_type_data_elementCriteria(createCriteria("entity_type_data_element"));
+	}
+	
+	public Entity_detailCriteria createEntity_detailCriteria() {
+		return new Entity_detailCriteria(createCriteria("entity_detail"));
+	}
+	
+	public Task_activityCriteria createTask_activityCriteria() {
+		return new Task_activityCriteria(createCriteria("task_activity"));
 	}
 	
 	public Entity_type uniqueEntity_type() {

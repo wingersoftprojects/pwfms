@@ -84,8 +84,8 @@ public class Data_elementCriteria extends AbstractORMCriteria {
 		return new Entity_detailCriteria(createCriteria("entity_detail"));
 	}
 	
-	public Task_data_elementCriteria createTask_data_elementCriteria() {
-		return new Task_data_elementCriteria(createCriteria("task_data_element"));
+	public Task_activity_deCriteria createTask_data_elementCriteria() {
+		return new Task_activity_deCriteria(createCriteria("task_data_element"));
 	}
 	
 	public Data_element uniqueData_element() {

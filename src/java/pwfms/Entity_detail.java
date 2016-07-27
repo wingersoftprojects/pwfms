@@ -369,10 +369,10 @@ public class Entity_detail implements Serializable {
 				getData_element().getEntity_detail().remove(this);
 			}
 			
-			pwfms.Task[] lTasks = (pwfms.Task[])getTask().toArray(new pwfms.Task[getTask().size()]);
-			for(int i = 0; i < lTasks.length; i++) {
-				lTasks[i].setEntity(null);
+			if(getEntity_type() != null) {
+				getEntity_type().getEntity_detail().remove(this);
 			}
+			
 			return delete();
 		}
 		catch(Exception e) {
@@ -387,10 +387,10 @@ public class Entity_detail implements Serializable {
 				getData_element().getEntity_detail().remove(this);
 			}
 			
-			pwfms.Task[] lTasks = (pwfms.Task[])getTask().toArray(new pwfms.Task[getTask().size()]);
-			for(int i = 0; i < lTasks.length; i++) {
-				lTasks[i].setEntity(null);
+			if(getEntity_type() != null) {
+				getEntity_type().getEntity_detail().remove(this);
 			}
+			
 			try {
 				session.delete(this);
 				return true;
@@ -418,10 +418,10 @@ public class Entity_detail implements Serializable {
 	@Column(name="data_element_value", nullable=false, length=250)	
 	private String data_element_value;
 	
-	@OneToMany(mappedBy="entity", targetEntity=pwfms.Task.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set task = new java.util.HashSet();
+	@ManyToOne(targetEntity=pwfms.Entity_type.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="entity_type_id", referencedColumnName="entity_type_id", nullable=false) })	
+	private pwfms.Entity_type entity_type;
 	
 	private void setEntity_detail_id(int value) {
 		this.entity_detail_id = value;
@@ -451,14 +451,13 @@ public class Entity_detail implements Serializable {
 		return data_element;
 	}
 	
-	public void setTask(java.util.Set value) {
-		this.task = value;
+	public void setEntity_type(pwfms.Entity_type value) {
+		this.entity_type = value;
 	}
 	
-	public java.util.Set getTask() {
-		return task;
+	public pwfms.Entity_type getEntity_type() {
+		return entity_type;
 	}
-	
 	
 	public String toString() {
 		return String.valueOf(getEntity_detail_id());

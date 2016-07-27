@@ -22,8 +22,6 @@ public class TaskCriteria extends AbstractORMCriteria {
 	public final IntegerExpression task_id;
 	public final IntegerExpression processId;
 	public final AssociationExpression process;
-	public final IntegerExpression activityId;
-	public final AssociationExpression activity;
 	public final DateExpression start_date;
 	public final DateExpression end_date;
 	public final DateExpression add_date;
@@ -31,23 +29,16 @@ public class TaskCriteria extends AbstractORMCriteria {
 	public final AssociationExpression added_by;
 	public final IntegerExpression task_assigned_toId;
 	public final AssociationExpression task_assigned_to;
-	public final DateExpression due_date;
-	public final DateExpression flag_date;
-	public final IntegerExpression outcomeId;
-	public final AssociationExpression outcome;
-	public final IntegerExpression entityId;
-	public final AssociationExpression entity;
 	public final StringExpression comment;
-	public final CollectionExpression task_data_element;
-	public final CollectionExpression task_document;
+	public final StringExpression current_status;
+	public final DateExpression current_status_date;
+	public final CollectionExpression task_activity;
 	
 	public TaskCriteria(Criteria criteria) {
 		super(criteria);
 		task_id = new IntegerExpression("task_id", this);
 		processId = new IntegerExpression("process.process_id", this);
 		process = new AssociationExpression("process", this);
-		activityId = new IntegerExpression("activity.activity_id", this);
-		activity = new AssociationExpression("activity", this);
 		start_date = new DateExpression("start_date", this);
 		end_date = new DateExpression("end_date", this);
 		add_date = new DateExpression("add_date", this);
@@ -55,15 +46,10 @@ public class TaskCriteria extends AbstractORMCriteria {
 		added_by = new AssociationExpression("added_by", this);
 		task_assigned_toId = new IntegerExpression("task_assigned_to.user_detail_id", this);
 		task_assigned_to = new AssociationExpression("task_assigned_to", this);
-		due_date = new DateExpression("due_date", this);
-		flag_date = new DateExpression("flag_date", this);
-		outcomeId = new IntegerExpression("outcome.outcome_id", this);
-		outcome = new AssociationExpression("outcome", this);
-		entityId = new IntegerExpression("entity.entity_detail_id", this);
-		entity = new AssociationExpression("entity", this);
 		comment = new StringExpression("comment", this);
-		task_data_element = new CollectionExpression("task_data_element", this);
-		task_document = new CollectionExpression("task_document", this);
+		current_status = new StringExpression("current_status", this);
+		current_status_date = new DateExpression("current_status_date", this);
+		task_activity = new CollectionExpression("task_activity", this);
 	}
 	
 	public TaskCriteria(PersistentSession session) {
@@ -78,10 +64,6 @@ public class TaskCriteria extends AbstractORMCriteria {
 		return new ProcessCriteria(createCriteria("process"));
 	}
 	
-	public ActivityCriteria createActivityCriteria() {
-		return new ActivityCriteria(createCriteria("activity"));
-	}
-	
 	public User_detailCriteria createAdded_byCriteria() {
 		return new User_detailCriteria(createCriteria("added_by"));
 	}
@@ -90,20 +72,8 @@ public class TaskCriteria extends AbstractORMCriteria {
 		return new User_detailCriteria(createCriteria("task_assigned_to"));
 	}
 	
-	public OutcomeCriteria createOutcomeCriteria() {
-		return new OutcomeCriteria(createCriteria("outcome"));
-	}
-	
-	public Entity_detailCriteria createEntityCriteria() {
-		return new Entity_detailCriteria(createCriteria("entity"));
-	}
-	
-	public Task_data_elementCriteria createTask_data_elementCriteria() {
-		return new Task_data_elementCriteria(createCriteria("task_data_element"));
-	}
-	
-	public Task_documentCriteria createTask_documentCriteria() {
-		return new Task_documentCriteria(createCriteria("task_document"));
+	public Task_activityCriteria createTask_activityCriteria() {
+		return new Task_activityCriteria(createCriteria("task_activity"));
 	}
 	
 	public Task uniqueTask() {

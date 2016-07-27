@@ -35,7 +35,7 @@ public class ActivityCriteria extends AbstractORMCriteria {
 	public final CollectionExpression activity_outcome;
 	public final CollectionExpression activity_document_type;
 	public final CollectionExpression activity_entity_type;
-	public final CollectionExpression task;
+	public final CollectionExpression task_activity;
 	
 	public ActivityCriteria(Criteria criteria) {
 		super(criteria);
@@ -55,7 +55,7 @@ public class ActivityCriteria extends AbstractORMCriteria {
 		activity_outcome = new CollectionExpression("activity_outcome", this);
 		activity_document_type = new CollectionExpression("activity_document_type", this);
 		activity_entity_type = new CollectionExpression("activity_entity_type", this);
-		task = new CollectionExpression("task", this);
+		task_activity = new CollectionExpression("task_activity", this);
 	}
 	
 	public ActivityCriteria(PersistentSession session) {
@@ -90,8 +90,8 @@ public class ActivityCriteria extends AbstractORMCriteria {
 		return new Activity_entity_typeCriteria(createCriteria("activity_entity_type"));
 	}
 	
-	public TaskCriteria createTaskCriteria() {
-		return new TaskCriteria(createCriteria("task"));
+	public Task_activityCriteria createTask_activityCriteria() {
+		return new Task_activityCriteria(createCriteria("task_activity"));
 	}
 	
 	public Activity uniqueActivity() {

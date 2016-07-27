@@ -54,8 +54,8 @@ public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new Activity_document_typeDetachedCriteria(createCriteria("activity_document_type"));
 	}
 	
-	public Task_documentDetachedCriteria createTask_documentCriteria() {
-		return new Task_documentDetachedCriteria(createCriteria("task_document"));
+	public Task_activity_docDetachedCriteria createTask_documentCriteria() {
+		return new Task_activity_docDetachedCriteria(createCriteria("task_document"));
 	}
 	
 	public Document_type uniqueDocument_type(PersistentSession session) {

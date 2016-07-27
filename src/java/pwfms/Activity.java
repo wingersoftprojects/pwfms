@@ -389,9 +389,9 @@ public class Activity implements Serializable {
 			for(int i = 0; i < lActivity_entity_types.length; i++) {
 				lActivity_entity_types[i].setActivity(null);
 			}
-			pwfms.Task[] lTasks = (pwfms.Task[])getTask().toArray(new pwfms.Task[getTask().size()]);
-			for(int i = 0; i < lTasks.length; i++) {
-				lTasks[i].setActivity(null);
+			pwfms.Task_activity[] lTask_activitys = (pwfms.Task_activity[])getTask_activity().toArray(new pwfms.Task_activity[getTask_activity().size()]);
+			for(int i = 0; i < lTask_activitys.length; i++) {
+				lTask_activitys[i].setActivity(null);
 			}
 			return delete();
 		}
@@ -427,9 +427,9 @@ public class Activity implements Serializable {
 			for(int i = 0; i < lActivity_entity_types.length; i++) {
 				lActivity_entity_types[i].setActivity(null);
 			}
-			pwfms.Task[] lTasks = (pwfms.Task[])getTask().toArray(new pwfms.Task[getTask().size()]);
-			for(int i = 0; i < lTasks.length; i++) {
-				lTasks[i].setActivity(null);
+			pwfms.Task_activity[] lTask_activitys = (pwfms.Task_activity[])getTask_activity().toArray(new pwfms.Task_activity[getTask_activity().size()]);
+			for(int i = 0; i < lTask_activitys.length; i++) {
+				lTask_activitys[i].setActivity(null);
 			}
 			try {
 				session.delete(this);
@@ -504,10 +504,10 @@ public class Activity implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set activity_entity_type = new java.util.HashSet();
 	
-	@OneToMany(mappedBy="activity", targetEntity=pwfms.Task.class)	
+	@OneToMany(mappedBy="activity", targetEntity=pwfms.Task_activity.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set task = new java.util.HashSet();
+	private java.util.Set task_activity = new java.util.HashSet();
 	
 	private void setActivity_id(int value) {
 		this.activity_id = value;
@@ -666,12 +666,12 @@ public class Activity implements Serializable {
 	}
 	
 	
-	public void setTask(java.util.Set value) {
-		this.task = value;
+	public void setTask_activity(java.util.Set value) {
+		this.task_activity = value;
 	}
 	
-	public java.util.Set getTask() {
-		return task;
+	public java.util.Set getTask_activity() {
+		return task_activity;
 	}
 	
 	

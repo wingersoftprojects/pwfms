@@ -385,7 +385,7 @@ public class Data_element implements Serializable {
 			for(int i = 0; i < lEntity_details.length; i++) {
 				lEntity_details[i].setData_element(null);
 			}
-			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
+			pwfms.Task_activity_de[] lTask_data_elements = (pwfms.Task_activity_de[])getTask_data_element().toArray(new pwfms.Task_activity_de[getTask_data_element().size()]);
 			for(int i = 0; i < lTask_data_elements.length; i++) {
 				lTask_data_elements[i].setData_element(null);
 			}
@@ -419,7 +419,7 @@ public class Data_element implements Serializable {
 			for(int i = 0; i < lEntity_details.length; i++) {
 				lEntity_details[i].setData_element(null);
 			}
-			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
+			pwfms.Task_activity_de[] lTask_data_elements = (pwfms.Task_activity_de[])getTask_data_element().toArray(new pwfms.Task_activity_de[getTask_data_element().size()]);
 			for(int i = 0; i < lTask_data_elements.length; i++) {
 				lTask_data_elements[i].setData_element(null);
 			}
@@ -488,7 +488,7 @@ public class Data_element implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set entity_detail = new java.util.HashSet();
 	
-	@OneToMany(mappedBy="data_element", targetEntity=pwfms.Task_data_element.class)	
+	@OneToMany(mappedBy="data_element", targetEntity=pwfms.Task_activity_de.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task_data_element = new java.util.HashSet();

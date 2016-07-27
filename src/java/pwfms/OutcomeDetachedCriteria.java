@@ -26,7 +26,7 @@ public class OutcomeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression companyId;
 	public final AssociationExpression company;
 	public final CollectionExpression activity_outcome;
-	public final CollectionExpression task;
+	public final CollectionExpression task_activity;
 	
 	public OutcomeDetachedCriteria() {
 		super(pwfms.Outcome.class, pwfms.OutcomeCriteria.class);
@@ -37,7 +37,7 @@ public class OutcomeDetachedCriteria extends AbstractORMDetachedCriteria {
 		companyId = new IntegerExpression("company.company_id", this.getDetachedCriteria());
 		company = new AssociationExpression("company", this.getDetachedCriteria());
 		activity_outcome = new CollectionExpression("activity_outcome", this.getDetachedCriteria());
-		task = new CollectionExpression("task", this.getDetachedCriteria());
+		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
 	public OutcomeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -49,7 +49,7 @@ public class OutcomeDetachedCriteria extends AbstractORMDetachedCriteria {
 		companyId = new IntegerExpression("company.company_id", this.getDetachedCriteria());
 		company = new AssociationExpression("company", this.getDetachedCriteria());
 		activity_outcome = new CollectionExpression("activity_outcome", this.getDetachedCriteria());
-		task = new CollectionExpression("task", this.getDetachedCriteria());
+		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
 	public CompanyDetachedCriteria createCompanyCriteria() {
@@ -60,8 +60,8 @@ public class OutcomeDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new Activity_outcomeDetachedCriteria(createCriteria("activity_outcome"));
 	}
 	
-	public TaskDetachedCriteria createTaskCriteria() {
-		return new TaskDetachedCriteria(createCriteria("task"));
+	public Task_activityDetachedCriteria createTask_activityCriteria() {
+		return new Task_activityDetachedCriteria(createCriteria("task_activity"));
 	}
 	
 	public Outcome uniqueOutcome(PersistentSession session) {

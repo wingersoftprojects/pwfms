@@ -23,7 +23,8 @@ public class Entity_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression data_elementId;
 	public final AssociationExpression data_element;
 	public final StringExpression data_element_value;
-	public final CollectionExpression task;
+	public final IntegerExpression entity_typeId;
+	public final AssociationExpression entity_type;
 	
 	public Entity_detailDetachedCriteria() {
 		super(pwfms.Entity_detail.class, pwfms.Entity_detailCriteria.class);
@@ -31,7 +32,8 @@ public class Entity_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		data_elementId = new IntegerExpression("data_element.data_element_id", this.getDetachedCriteria());
 		data_element = new AssociationExpression("data_element", this.getDetachedCriteria());
 		data_element_value = new StringExpression("data_element_value", this.getDetachedCriteria());
-		task = new CollectionExpression("task", this.getDetachedCriteria());
+		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this.getDetachedCriteria());
+		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
 	}
 	
 	public Entity_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -40,15 +42,16 @@ public class Entity_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		data_elementId = new IntegerExpression("data_element.data_element_id", this.getDetachedCriteria());
 		data_element = new AssociationExpression("data_element", this.getDetachedCriteria());
 		data_element_value = new StringExpression("data_element_value", this.getDetachedCriteria());
-		task = new CollectionExpression("task", this.getDetachedCriteria());
+		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this.getDetachedCriteria());
+		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
 	}
 	
 	public Data_elementDetachedCriteria createData_elementCriteria() {
 		return new Data_elementDetachedCriteria(createCriteria("data_element"));
 	}
 	
-	public TaskDetachedCriteria createTaskCriteria() {
-		return new TaskDetachedCriteria(createCriteria("task"));
+	public Entity_typeDetachedCriteria createEntity_typeCriteria() {
+		return new Entity_typeDetachedCriteria(createCriteria("entity_type"));
 	}
 	
 	public Entity_detail uniqueEntity_detail(PersistentSession session) {

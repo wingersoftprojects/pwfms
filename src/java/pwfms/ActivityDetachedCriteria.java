@@ -35,7 +35,7 @@ public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression activity_outcome;
 	public final CollectionExpression activity_document_type;
 	public final CollectionExpression activity_entity_type;
-	public final CollectionExpression task;
+	public final CollectionExpression task_activity;
 	
 	public ActivityDetachedCriteria() {
 		super(pwfms.Activity.class, pwfms.ActivityCriteria.class);
@@ -55,7 +55,7 @@ public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 		activity_outcome = new CollectionExpression("activity_outcome", this.getDetachedCriteria());
 		activity_document_type = new CollectionExpression("activity_document_type", this.getDetachedCriteria());
 		activity_entity_type = new CollectionExpression("activity_entity_type", this.getDetachedCriteria());
-		task = new CollectionExpression("task", this.getDetachedCriteria());
+		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
 	public ActivityDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -76,7 +76,7 @@ public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 		activity_outcome = new CollectionExpression("activity_outcome", this.getDetachedCriteria());
 		activity_document_type = new CollectionExpression("activity_document_type", this.getDetachedCriteria());
 		activity_entity_type = new CollectionExpression("activity_entity_type", this.getDetachedCriteria());
-		task = new CollectionExpression("task", this.getDetachedCriteria());
+		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
 	public ProcessDetachedCriteria createProcessCriteria() {
@@ -103,8 +103,8 @@ public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new Activity_entity_typeDetachedCriteria(createCriteria("activity_entity_type"));
 	}
 	
-	public TaskDetachedCriteria createTaskCriteria() {
-		return new TaskDetachedCriteria(createCriteria("task"));
+	public Task_activityDetachedCriteria createTask_activityCriteria() {
+		return new Task_activityDetachedCriteria(createCriteria("task_activity"));
 	}
 	
 	public Activity uniqueActivity(PersistentSession session) {

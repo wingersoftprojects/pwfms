@@ -96,8 +96,8 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new Entity_detailDetachedCriteria(createCriteria("entity_detail"));
 	}
 	
-	public Task_data_elementDetachedCriteria createTask_data_elementCriteria() {
-		return new Task_data_elementDetachedCriteria(createCriteria("task_data_element"));
+	public Task_activity_deDetachedCriteria createTask_data_elementCriteria() {
+		return new Task_activity_deDetachedCriteria(createCriteria("task_data_element"));
 	}
 	
 	public Data_element uniqueData_element(PersistentSession session) {

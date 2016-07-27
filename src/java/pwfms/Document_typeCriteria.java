@@ -52,8 +52,8 @@ public class Document_typeCriteria extends AbstractORMCriteria {
 		return new Activity_document_typeCriteria(createCriteria("activity_document_type"));
 	}
 	
-	public Task_documentCriteria createTask_documentCriteria() {
-		return new Task_documentCriteria(createCriteria("task_document"));
+	public Task_activity_docCriteria createTask_documentCriteria() {
+		return new Task_activity_docCriteria(createCriteria("task_document"));
 	}
 	
 	public Document_type uniqueDocument_type() {

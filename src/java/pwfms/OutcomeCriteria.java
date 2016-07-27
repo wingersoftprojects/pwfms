@@ -26,7 +26,7 @@ public class OutcomeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression companyId;
 	public final AssociationExpression company;
 	public final CollectionExpression activity_outcome;
-	public final CollectionExpression task;
+	public final CollectionExpression task_activity;
 	
 	public OutcomeCriteria(Criteria criteria) {
 		super(criteria);
@@ -37,7 +37,7 @@ public class OutcomeCriteria extends AbstractORMCriteria {
 		companyId = new IntegerExpression("company.company_id", this);
 		company = new AssociationExpression("company", this);
 		activity_outcome = new CollectionExpression("activity_outcome", this);
-		task = new CollectionExpression("task", this);
+		task_activity = new CollectionExpression("task_activity", this);
 	}
 	
 	public OutcomeCriteria(PersistentSession session) {
@@ -56,8 +56,8 @@ public class OutcomeCriteria extends AbstractORMCriteria {
 		return new Activity_outcomeCriteria(createCriteria("activity_outcome"));
 	}
 	
-	public TaskCriteria createTaskCriteria() {
-		return new TaskCriteria(createCriteria("task"));
+	public Task_activityCriteria createTask_activityCriteria() {
+		return new Task_activityCriteria(createCriteria("task_activity"));
 	}
 	
 	public Outcome uniqueOutcome() {

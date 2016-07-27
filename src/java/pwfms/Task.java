@@ -369,10 +369,6 @@ public class Task implements Serializable {
 				getProcess().getTask().remove(this);
 			}
 			
-			if(getActivity() != null) {
-				getActivity().getTask().remove(this);
-			}
-			
 			if(getAdded_by() != null) {
 				getAdded_by().getTask().remove(this);
 			}
@@ -381,21 +377,9 @@ public class Task implements Serializable {
 				getTask_assigned_to().getTask1().remove(this);
 			}
 			
-			if(getOutcome() != null) {
-				getOutcome().getTask().remove(this);
-			}
-			
-			if(getEntity() != null) {
-				getEntity().getTask().remove(this);
-			}
-			
-			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
-			for(int i = 0; i < lTask_data_elements.length; i++) {
-				lTask_data_elements[i].setTask(null);
-			}
-			pwfms.Task_document[] lTask_documents = (pwfms.Task_document[])getTask_document().toArray(new pwfms.Task_document[getTask_document().size()]);
-			for(int i = 0; i < lTask_documents.length; i++) {
-				lTask_documents[i].setTask(null);
+			pwfms.Task_activity[] lTask_activitys = (pwfms.Task_activity[])getTask_activity().toArray(new pwfms.Task_activity[getTask_activity().size()]);
+			for(int i = 0; i < lTask_activitys.length; i++) {
+				lTask_activitys[i].setTask(null);
 			}
 			return delete();
 		}
@@ -411,10 +395,6 @@ public class Task implements Serializable {
 				getProcess().getTask().remove(this);
 			}
 			
-			if(getActivity() != null) {
-				getActivity().getTask().remove(this);
-			}
-			
 			if(getAdded_by() != null) {
 				getAdded_by().getTask().remove(this);
 			}
@@ -423,21 +403,9 @@ public class Task implements Serializable {
 				getTask_assigned_to().getTask1().remove(this);
 			}
 			
-			if(getOutcome() != null) {
-				getOutcome().getTask().remove(this);
-			}
-			
-			if(getEntity() != null) {
-				getEntity().getTask().remove(this);
-			}
-			
-			pwfms.Task_data_element[] lTask_data_elements = (pwfms.Task_data_element[])getTask_data_element().toArray(new pwfms.Task_data_element[getTask_data_element().size()]);
-			for(int i = 0; i < lTask_data_elements.length; i++) {
-				lTask_data_elements[i].setTask(null);
-			}
-			pwfms.Task_document[] lTask_documents = (pwfms.Task_document[])getTask_document().toArray(new pwfms.Task_document[getTask_document().size()]);
-			for(int i = 0; i < lTask_documents.length; i++) {
-				lTask_documents[i].setTask(null);
+			pwfms.Task_activity[] lTask_activitys = (pwfms.Task_activity[])getTask_activity().toArray(new pwfms.Task_activity[getTask_activity().size()]);
+			for(int i = 0; i < lTask_activitys.length; i++) {
+				lTask_activitys[i].setTask(null);
 			}
 			try {
 				session.delete(this);
@@ -463,11 +431,6 @@ public class Task implements Serializable {
 	@JoinColumns({ @JoinColumn(name="process_id", referencedColumnName="process_id", nullable=false) })	
 	private pwfms.Process process;
 	
-	@ManyToOne(targetEntity=pwfms.Activity.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="activity_id", referencedColumnName="activity_id", nullable=false) })	
-	private pwfms.Activity activity;
-	
 	@Column(name="start_date", nullable=true)	
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date start_date;
@@ -482,44 +445,28 @@ public class Task implements Serializable {
 	
 	@ManyToOne(targetEntity=pwfms.User_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="added_by", referencedColumnName="user_detail_id", nullable=false) })	
+	@JoinColumns({ @JoinColumn(name="added_by", referencedColumnName="user_detail_id") })	
 	private pwfms.User_detail added_by;
 	
 	@ManyToOne(targetEntity=pwfms.User_detail.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="task_assigned_to", referencedColumnName="user_detail_id", nullable=false) })	
+	@JoinColumns({ @JoinColumn(name="task_assigned_to", referencedColumnName="user_detail_id") })	
 	private pwfms.User_detail task_assigned_to;
-	
-	@Column(name="due_date", nullable=true)	
-	@Temporal(TemporalType.DATE)	
-	private java.util.Date due_date;
-	
-	@Column(name="flag_date", nullable=true)	
-	@Temporal(TemporalType.DATE)	
-	private java.util.Date flag_date;
-	
-	@ManyToOne(targetEntity=pwfms.Outcome.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="outcome_id", referencedColumnName="outcome_id", nullable=false) })	
-	private pwfms.Outcome outcome;
-	
-	@ManyToOne(targetEntity=pwfms.Entity_detail.class, fetch=FetchType.LAZY)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="entity_id", referencedColumnName="entity_detail_id", nullable=false) })	
-	private pwfms.Entity_detail entity;
 	
 	@Column(name="comment", nullable=true, length=250)	
 	private String comment;
 	
-	@OneToMany(mappedBy="task", targetEntity=pwfms.Task_data_element.class)	
-	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set task_data_element = new java.util.HashSet();
+	@Column(name="current_status", nullable=true, length=100)	
+	private String current_status;
 	
-	@OneToMany(mappedBy="task", targetEntity=pwfms.Task_document.class)	
+	@Column(name="current_status_date", nullable=true)	
+	@Temporal(TemporalType.DATE)	
+	private java.util.Date current_status_date;
+	
+	@OneToMany(mappedBy="task", targetEntity=pwfms.Task_activity.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set task_document = new java.util.HashSet();
+	private java.util.Set task_activity = new java.util.HashSet();
 	
 	private void setTask_id(int value) {
 		this.task_id = value;
@@ -557,22 +504,6 @@ public class Task implements Serializable {
 		return add_date;
 	}
 	
-	public void setDue_date(java.util.Date value) {
-		this.due_date = value;
-	}
-	
-	public java.util.Date getDue_date() {
-		return due_date;
-	}
-	
-	public void setFlag_date(java.util.Date value) {
-		this.flag_date = value;
-	}
-	
-	public java.util.Date getFlag_date() {
-		return flag_date;
-	}
-	
 	public void setComment(String value) {
 		this.comment = value;
 	}
@@ -581,12 +512,20 @@ public class Task implements Serializable {
 		return comment;
 	}
 	
-	public void setActivity(pwfms.Activity value) {
-		this.activity = value;
+	public void setCurrent_status(String value) {
+		this.current_status = value;
 	}
 	
-	public pwfms.Activity getActivity() {
-		return activity;
+	public String getCurrent_status() {
+		return current_status;
+	}
+	
+	public void setCurrent_status_date(java.util.Date value) {
+		this.current_status_date = value;
+	}
+	
+	public java.util.Date getCurrent_status_date() {
+		return current_status_date;
 	}
 	
 	public void setProcess(pwfms.Process value) {
@@ -613,39 +552,20 @@ public class Task implements Serializable {
 		return task_assigned_to;
 	}
 	
-	public void setOutcome(pwfms.Outcome value) {
-		this.outcome = value;
+	public void setTask_activity(java.util.Set value) {
+		this.task_activity = value;
 	}
 	
-	public pwfms.Outcome getOutcome() {
-		return outcome;
-	}
-	
-	public void setEntity(pwfms.Entity_detail value) {
-		this.entity = value;
-	}
-	
-	public pwfms.Entity_detail getEntity() {
-		return entity;
-	}
-	
-	public void setTask_data_element(java.util.Set value) {
-		this.task_data_element = value;
-	}
-	
-	public java.util.Set getTask_data_element() {
-		return task_data_element;
+	public java.util.Set getTask_activity() {
+		return task_activity;
 	}
 	
 	
-	public void setTask_document(java.util.Set value) {
-		this.task_document = value;
-	}
+	@Transient	
+	private java.util.Date due_date;
 	
-	public java.util.Set getTask_document() {
-		return task_document;
-	}
-	
+	@Transient	
+	private java.util.Date flag_date;
 	
 	public String toString() {
 		return String.valueOf(getTask_id());

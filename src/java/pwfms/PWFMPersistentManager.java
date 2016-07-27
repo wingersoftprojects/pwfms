@@ -46,18 +46,19 @@ public class PWFMPersistentManager extends PersistentManager {
 		configuration.addAnnotatedClass(pwfms.Task.class);
 		configuration.addAnnotatedClass(pwfms.Section.class);
 		configuration.addAnnotatedClass(pwfms.Activity_document_type.class);
-		configuration.addAnnotatedClass(pwfms.Task_document.class);
+		configuration.addAnnotatedClass(pwfms.Task_activity_doc.class);
 		configuration.addAnnotatedClass(pwfms.Group_user.class);
 		configuration.addAnnotatedClass(pwfms.Activity_outcome.class);
 		configuration.addAnnotatedClass(pwfms.Entity_detail.class);
 		configuration.addAnnotatedClass(pwfms.Process.class);
 		configuration.addAnnotatedClass(pwfms.Activity_entity_type.class);
-		configuration.addAnnotatedClass(pwfms.Task_data_element.class);
+		configuration.addAnnotatedClass(pwfms.Task_activity_de.class);
 		configuration.addAnnotatedClass(pwfms.Document_type.class);
 		configuration.addAnnotatedClass(pwfms.Data_element_category.class);
 		configuration.addAnnotatedClass(pwfms.User_detail.class);
 		configuration.addAnnotatedClass(pwfms.Group_right.class);
 		configuration.addAnnotatedClass(pwfms.Entity_type.class);
+		configuration.addAnnotatedClass(pwfms.Task_activity.class);
 		configuration.buildMappings();
 		return configuration;
 	}

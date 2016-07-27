@@ -373,7 +373,7 @@ public class Document_type implements Serializable {
 			for(int i = 0; i < lActivity_document_types.length; i++) {
 				lActivity_document_types[i].setDocument_type(null);
 			}
-			pwfms.Task_document[] lTask_documents = (pwfms.Task_document[])getTask_document().toArray(new pwfms.Task_document[getTask_document().size()]);
+			pwfms.Task_activity_doc[] lTask_documents = (pwfms.Task_activity_doc[])getTask_document().toArray(new pwfms.Task_activity_doc[getTask_document().size()]);
 			for(int i = 0; i < lTask_documents.length; i++) {
 				lTask_documents[i].setDocument_type(null);
 			}
@@ -395,7 +395,7 @@ public class Document_type implements Serializable {
 			for(int i = 0; i < lActivity_document_types.length; i++) {
 				lActivity_document_types[i].setDocument_type(null);
 			}
-			pwfms.Task_document[] lTask_documents = (pwfms.Task_document[])getTask_document().toArray(new pwfms.Task_document[getTask_document().size()]);
+			pwfms.Task_activity_doc[] lTask_documents = (pwfms.Task_activity_doc[])getTask_document().toArray(new pwfms.Task_activity_doc[getTask_document().size()]);
 			for(int i = 0; i < lTask_documents.length; i++) {
 				lTask_documents[i].setDocument_type(null);
 			}
@@ -431,7 +431,7 @@ public class Document_type implements Serializable {
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set activity_document_type = new java.util.HashSet();
 	
-	@OneToMany(mappedBy="document_type", targetEntity=pwfms.Task_document.class)	
+	@OneToMany(mappedBy="document_type", targetEntity=pwfms.Task_activity_doc.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task_document = new java.util.HashSet();

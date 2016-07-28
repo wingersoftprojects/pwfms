@@ -36,6 +36,7 @@ public class PWFMPersistentManager extends PersistentManager {
 	@Override
 	public Configuration createConfiguration() {
 		Configuration configuration = new Configuration();
+		configuration.addAnnotatedClass(pwfms.Group_right.class);
 		configuration.addAnnotatedClass(pwfms.Activity.class);
 		configuration.addAnnotatedClass(pwfms.Group_detail.class);
 		configuration.addAnnotatedClass(pwfms.Data_element.class);
@@ -50,13 +51,12 @@ public class PWFMPersistentManager extends PersistentManager {
 		configuration.addAnnotatedClass(pwfms.Group_user.class);
 		configuration.addAnnotatedClass(pwfms.Activity_outcome.class);
 		configuration.addAnnotatedClass(pwfms.Entity_detail.class);
-		configuration.addAnnotatedClass(pwfms.Process.class);
+		configuration.addAnnotatedClass(pwfms.Company_process.class);
 		configuration.addAnnotatedClass(pwfms.Activity_entity_type.class);
 		configuration.addAnnotatedClass(pwfms.Task_activity_de.class);
 		configuration.addAnnotatedClass(pwfms.Document_type.class);
 		configuration.addAnnotatedClass(pwfms.Data_element_category.class);
 		configuration.addAnnotatedClass(pwfms.User_detail.class);
-		configuration.addAnnotatedClass(pwfms.Group_right.class);
 		configuration.addAnnotatedClass(pwfms.Entity_type.class);
 		configuration.addAnnotatedClass(pwfms.Task_activity.class);
 		configuration.buildMappings();

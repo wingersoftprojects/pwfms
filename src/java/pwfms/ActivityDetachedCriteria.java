@@ -21,8 +21,8 @@ import org.orm.criteria.*;
 public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression activity_id;
 	public final StringExpression activity_name;
-	public final IntegerExpression processId;
-	public final AssociationExpression process;
+	public final IntegerExpression company_processId;
+	public final AssociationExpression company_process;
 	public final IntegerExpression is_start;
 	public final IntegerExpression is_final;
 	public final IntegerExpression from_activity_id;
@@ -41,8 +41,8 @@ public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 		super(pwfms.Activity.class, pwfms.ActivityCriteria.class);
 		activity_id = new IntegerExpression("activity_id", this.getDetachedCriteria());
 		activity_name = new StringExpression("activity_name", this.getDetachedCriteria());
-		processId = new IntegerExpression("process.process_id", this.getDetachedCriteria());
-		process = new AssociationExpression("process", this.getDetachedCriteria());
+		company_processId = new IntegerExpression("company_process.company_process_id", this.getDetachedCriteria());
+		company_process = new AssociationExpression("company_process", this.getDetachedCriteria());
 		is_start = new IntegerExpression("is_start", this.getDetachedCriteria());
 		is_final = new IntegerExpression("is_final", this.getDetachedCriteria());
 		from_activity_id = new IntegerExpression("from_activity_id", this.getDetachedCriteria());
@@ -62,8 +62,8 @@ public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 		super(aDetachedCriteria, pwfms.ActivityCriteria.class);
 		activity_id = new IntegerExpression("activity_id", this.getDetachedCriteria());
 		activity_name = new StringExpression("activity_name", this.getDetachedCriteria());
-		processId = new IntegerExpression("process.process_id", this.getDetachedCriteria());
-		process = new AssociationExpression("process", this.getDetachedCriteria());
+		company_processId = new IntegerExpression("company_process.company_process_id", this.getDetachedCriteria());
+		company_process = new AssociationExpression("company_process", this.getDetachedCriteria());
 		is_start = new IntegerExpression("is_start", this.getDetachedCriteria());
 		is_final = new IntegerExpression("is_final", this.getDetachedCriteria());
 		from_activity_id = new IntegerExpression("from_activity_id", this.getDetachedCriteria());
@@ -79,8 +79,8 @@ public class ActivityDetachedCriteria extends AbstractORMDetachedCriteria {
 		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
-	public ProcessDetachedCriteria createProcessCriteria() {
-		return new ProcessDetachedCriteria(createCriteria("process"));
+	public Company_processDetachedCriteria createCompany_processCriteria() {
+		return new Company_processDetachedCriteria(createCriteria("company_process"));
 	}
 	
 	public SectionDetachedCriteria createSectionCriteria() {

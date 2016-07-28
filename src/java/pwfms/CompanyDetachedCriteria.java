@@ -25,7 +25,7 @@ public class CompanyDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final BlobExpression logo;
 	public final StringExpression email;
 	public final StringExpression phone;
-	public final CollectionExpression process;
+	public final CollectionExpression company_process;
 	public final CollectionExpression document_type;
 	public final CollectionExpression user_detail;
 	public final CollectionExpression group_detail;
@@ -42,7 +42,7 @@ public class CompanyDetachedCriteria extends AbstractORMDetachedCriteria {
 		logo = new BlobExpression("logo", this.getDetachedCriteria());
 		email = new StringExpression("email", this.getDetachedCriteria());
 		phone = new StringExpression("phone", this.getDetachedCriteria());
-		process = new CollectionExpression("process", this.getDetachedCriteria());
+		company_process = new CollectionExpression("company_process", this.getDetachedCriteria());
 		document_type = new CollectionExpression("document_type", this.getDetachedCriteria());
 		user_detail = new CollectionExpression("user_detail", this.getDetachedCriteria());
 		group_detail = new CollectionExpression("group_detail", this.getDetachedCriteria());
@@ -60,7 +60,7 @@ public class CompanyDetachedCriteria extends AbstractORMDetachedCriteria {
 		logo = new BlobExpression("logo", this.getDetachedCriteria());
 		email = new StringExpression("email", this.getDetachedCriteria());
 		phone = new StringExpression("phone", this.getDetachedCriteria());
-		process = new CollectionExpression("process", this.getDetachedCriteria());
+		company_process = new CollectionExpression("company_process", this.getDetachedCriteria());
 		document_type = new CollectionExpression("document_type", this.getDetachedCriteria());
 		user_detail = new CollectionExpression("user_detail", this.getDetachedCriteria());
 		group_detail = new CollectionExpression("group_detail", this.getDetachedCriteria());
@@ -70,8 +70,8 @@ public class CompanyDetachedCriteria extends AbstractORMDetachedCriteria {
 		outcome = new CollectionExpression("outcome", this.getDetachedCriteria());
 	}
 	
-	public ProcessDetachedCriteria createProcessCriteria() {
-		return new ProcessDetachedCriteria(createCriteria("process"));
+	public Company_processDetachedCriteria createCompany_processCriteria() {
+		return new Company_processDetachedCriteria(createCriteria("company_process"));
 	}
 	
 	public Document_typeDetachedCriteria createDocument_typeCriteria() {

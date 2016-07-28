@@ -20,8 +20,8 @@ import org.orm.criteria.*;
 
 public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression task_id;
-	public final IntegerExpression processId;
-	public final AssociationExpression process;
+	public final IntegerExpression company_processId;
+	public final AssociationExpression company_process;
 	public final DateExpression start_date;
 	public final DateExpression end_date;
 	public final DateExpression add_date;
@@ -37,8 +37,8 @@ public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 	public TaskDetachedCriteria() {
 		super(pwfms.Task.class, pwfms.TaskCriteria.class);
 		task_id = new IntegerExpression("task_id", this.getDetachedCriteria());
-		processId = new IntegerExpression("process.process_id", this.getDetachedCriteria());
-		process = new AssociationExpression("process", this.getDetachedCriteria());
+		company_processId = new IntegerExpression("company_process.company_process_id", this.getDetachedCriteria());
+		company_process = new AssociationExpression("company_process", this.getDetachedCriteria());
 		start_date = new DateExpression("start_date", this.getDetachedCriteria());
 		end_date = new DateExpression("end_date", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
@@ -55,8 +55,8 @@ public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 	public TaskDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, pwfms.TaskCriteria.class);
 		task_id = new IntegerExpression("task_id", this.getDetachedCriteria());
-		processId = new IntegerExpression("process.process_id", this.getDetachedCriteria());
-		process = new AssociationExpression("process", this.getDetachedCriteria());
+		company_processId = new IntegerExpression("company_process.company_process_id", this.getDetachedCriteria());
+		company_process = new AssociationExpression("company_process", this.getDetachedCriteria());
 		start_date = new DateExpression("start_date", this.getDetachedCriteria());
 		end_date = new DateExpression("end_date", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
@@ -70,8 +70,8 @@ public class TaskDetachedCriteria extends AbstractORMDetachedCriteria {
 		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
-	public ProcessDetachedCriteria createProcessCriteria() {
-		return new ProcessDetachedCriteria(createCriteria("process"));
+	public Company_processDetachedCriteria createCompany_processCriteria() {
+		return new Company_processDetachedCriteria(createCriteria("company_process"));
 	}
 	
 	public User_detailDetachedCriteria createAdded_byCriteria() {

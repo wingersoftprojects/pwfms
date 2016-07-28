@@ -24,7 +24,7 @@ public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression companyId;
 	public final AssociationExpression company;
 	public final CollectionExpression activity_document_type;
-	public final CollectionExpression task_document;
+	public final CollectionExpression task_activity_doc;
 	
 	public Document_typeDetachedCriteria() {
 		super(pwfms.Document_type.class, pwfms.Document_typeCriteria.class);
@@ -33,7 +33,7 @@ public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		companyId = new IntegerExpression("company.company_id", this.getDetachedCriteria());
 		company = new AssociationExpression("company", this.getDetachedCriteria());
 		activity_document_type = new CollectionExpression("activity_document_type", this.getDetachedCriteria());
-		task_document = new CollectionExpression("task_document", this.getDetachedCriteria());
+		task_activity_doc = new CollectionExpression("task_activity_doc", this.getDetachedCriteria());
 	}
 	
 	public Document_typeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -43,7 +43,7 @@ public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		companyId = new IntegerExpression("company.company_id", this.getDetachedCriteria());
 		company = new AssociationExpression("company", this.getDetachedCriteria());
 		activity_document_type = new CollectionExpression("activity_document_type", this.getDetachedCriteria());
-		task_document = new CollectionExpression("task_document", this.getDetachedCriteria());
+		task_activity_doc = new CollectionExpression("task_activity_doc", this.getDetachedCriteria());
 	}
 	
 	public CompanyDetachedCriteria createCompanyCriteria() {
@@ -54,8 +54,8 @@ public class Document_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new Activity_document_typeDetachedCriteria(createCriteria("activity_document_type"));
 	}
 	
-	public Task_activity_docDetachedCriteria createTask_documentCriteria() {
-		return new Task_activity_docDetachedCriteria(createCriteria("task_document"));
+	public Task_activity_docDetachedCriteria createTask_activity_docCriteria() {
+		return new Task_activity_docDetachedCriteria(createCriteria("task_activity_doc"));
 	}
 	
 	public Document_type uniqueDocument_type(PersistentSession session) {

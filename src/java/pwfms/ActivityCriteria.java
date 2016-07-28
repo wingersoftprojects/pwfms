@@ -21,8 +21,8 @@ import org.orm.criteria.*;
 public class ActivityCriteria extends AbstractORMCriteria {
 	public final IntegerExpression activity_id;
 	public final StringExpression activity_name;
-	public final IntegerExpression processId;
-	public final AssociationExpression process;
+	public final IntegerExpression company_processId;
+	public final AssociationExpression company_process;
 	public final IntegerExpression is_start;
 	public final IntegerExpression is_final;
 	public final IntegerExpression from_activity_id;
@@ -41,8 +41,8 @@ public class ActivityCriteria extends AbstractORMCriteria {
 		super(criteria);
 		activity_id = new IntegerExpression("activity_id", this);
 		activity_name = new StringExpression("activity_name", this);
-		processId = new IntegerExpression("process.process_id", this);
-		process = new AssociationExpression("process", this);
+		company_processId = new IntegerExpression("company_process.company_process_id", this);
+		company_process = new AssociationExpression("company_process", this);
 		is_start = new IntegerExpression("is_start", this);
 		is_final = new IntegerExpression("is_final", this);
 		from_activity_id = new IntegerExpression("from_activity_id", this);
@@ -66,8 +66,8 @@ public class ActivityCriteria extends AbstractORMCriteria {
 		this(pwfms.PWFMPersistentManager.instance().getSession());
 	}
 	
-	public ProcessCriteria createProcessCriteria() {
-		return new ProcessCriteria(createCriteria("process"));
+	public Company_processCriteria createCompany_processCriteria() {
+		return new Company_processCriteria(createCriteria("company_process"));
 	}
 	
 	public SectionCriteria createSectionCriteria() {

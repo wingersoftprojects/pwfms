@@ -24,7 +24,7 @@ public class Document_typeCriteria extends AbstractORMCriteria {
 	public final IntegerExpression companyId;
 	public final AssociationExpression company;
 	public final CollectionExpression activity_document_type;
-	public final CollectionExpression task_document;
+	public final CollectionExpression task_activity_doc;
 	
 	public Document_typeCriteria(Criteria criteria) {
 		super(criteria);
@@ -33,7 +33,7 @@ public class Document_typeCriteria extends AbstractORMCriteria {
 		companyId = new IntegerExpression("company.company_id", this);
 		company = new AssociationExpression("company", this);
 		activity_document_type = new CollectionExpression("activity_document_type", this);
-		task_document = new CollectionExpression("task_document", this);
+		task_activity_doc = new CollectionExpression("task_activity_doc", this);
 	}
 	
 	public Document_typeCriteria(PersistentSession session) {
@@ -52,8 +52,8 @@ public class Document_typeCriteria extends AbstractORMCriteria {
 		return new Activity_document_typeCriteria(createCriteria("activity_document_type"));
 	}
 	
-	public Task_activity_docCriteria createTask_documentCriteria() {
-		return new Task_activity_docCriteria(createCriteria("task_document"));
+	public Task_activity_docCriteria createTask_activity_docCriteria() {
+		return new Task_activity_docCriteria(createCriteria("task_activity_doc"));
 	}
 	
 	public Document_type uniqueDocument_type() {

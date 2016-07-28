@@ -373,9 +373,9 @@ public class Document_type implements Serializable {
 			for(int i = 0; i < lActivity_document_types.length; i++) {
 				lActivity_document_types[i].setDocument_type(null);
 			}
-			pwfms.Task_activity_doc[] lTask_documents = (pwfms.Task_activity_doc[])getTask_document().toArray(new pwfms.Task_activity_doc[getTask_document().size()]);
-			for(int i = 0; i < lTask_documents.length; i++) {
-				lTask_documents[i].setDocument_type(null);
+			pwfms.Task_activity_doc[] lTask_activity_docs = (pwfms.Task_activity_doc[])getTask_activity_doc().toArray(new pwfms.Task_activity_doc[getTask_activity_doc().size()]);
+			for(int i = 0; i < lTask_activity_docs.length; i++) {
+				lTask_activity_docs[i].setDocument_type(null);
 			}
 			return delete();
 		}
@@ -395,9 +395,9 @@ public class Document_type implements Serializable {
 			for(int i = 0; i < lActivity_document_types.length; i++) {
 				lActivity_document_types[i].setDocument_type(null);
 			}
-			pwfms.Task_activity_doc[] lTask_documents = (pwfms.Task_activity_doc[])getTask_document().toArray(new pwfms.Task_activity_doc[getTask_document().size()]);
-			for(int i = 0; i < lTask_documents.length; i++) {
-				lTask_documents[i].setDocument_type(null);
+			pwfms.Task_activity_doc[] lTask_activity_docs = (pwfms.Task_activity_doc[])getTask_activity_doc().toArray(new pwfms.Task_activity_doc[getTask_activity_doc().size()]);
+			for(int i = 0; i < lTask_activity_docs.length; i++) {
+				lTask_activity_docs[i].setDocument_type(null);
 			}
 			try {
 				session.delete(this);
@@ -434,7 +434,7 @@ public class Document_type implements Serializable {
 	@OneToMany(mappedBy="document_type", targetEntity=pwfms.Task_activity_doc.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set task_document = new java.util.HashSet();
+	private java.util.Set task_activity_doc = new java.util.HashSet();
 	
 	private void setDocument_type_id(int value) {
 		this.document_type_id = value;
@@ -473,12 +473,12 @@ public class Document_type implements Serializable {
 	}
 	
 	
-	public void setTask_document(java.util.Set value) {
-		this.task_document = value;
+	public void setTask_activity_doc(java.util.Set value) {
+		this.task_activity_doc = value;
 	}
 	
-	public java.util.Set getTask_document() {
-		return task_document;
+	public java.util.Set getTask_activity_doc() {
+		return task_activity_doc;
 	}
 	
 	

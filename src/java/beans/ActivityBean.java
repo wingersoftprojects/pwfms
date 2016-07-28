@@ -7,9 +7,14 @@ package beans;
 
 import pwfms.Activity;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import org.orm.PersistentException;
 
 /**
  *
@@ -38,5 +43,11 @@ public class ActivityBean extends AbstractBean<Activity> implements Serializable
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
+    
+//    public List<Activity> getActivities(Process aProcess) {
+//        List<Activity> aActivities = new ArrayList<Activity>();
+//        aActivities = Activity.queryActivity("process=" + aProcess., null);
+//        return aActivities;
+//    }
 
 }

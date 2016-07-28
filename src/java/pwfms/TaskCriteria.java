@@ -20,8 +20,8 @@ import org.orm.criteria.*;
 
 public class TaskCriteria extends AbstractORMCriteria {
 	public final IntegerExpression task_id;
-	public final IntegerExpression processId;
-	public final AssociationExpression process;
+	public final IntegerExpression company_processId;
+	public final AssociationExpression company_process;
 	public final DateExpression start_date;
 	public final DateExpression end_date;
 	public final DateExpression add_date;
@@ -37,8 +37,8 @@ public class TaskCriteria extends AbstractORMCriteria {
 	public TaskCriteria(Criteria criteria) {
 		super(criteria);
 		task_id = new IntegerExpression("task_id", this);
-		processId = new IntegerExpression("process.process_id", this);
-		process = new AssociationExpression("process", this);
+		company_processId = new IntegerExpression("company_process.company_process_id", this);
+		company_process = new AssociationExpression("company_process", this);
 		start_date = new DateExpression("start_date", this);
 		end_date = new DateExpression("end_date", this);
 		add_date = new DateExpression("add_date", this);
@@ -60,8 +60,8 @@ public class TaskCriteria extends AbstractORMCriteria {
 		this(pwfms.PWFMPersistentManager.instance().getSession());
 	}
 	
-	public ProcessCriteria createProcessCriteria() {
-		return new ProcessCriteria(createCriteria("process"));
+	public Company_processCriteria createCompany_processCriteria() {
+		return new Company_processCriteria(createCriteria("company_process"));
 	}
 	
 	public User_detailCriteria createAdded_byCriteria() {

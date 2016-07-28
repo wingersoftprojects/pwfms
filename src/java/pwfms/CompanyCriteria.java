@@ -25,7 +25,7 @@ public class CompanyCriteria extends AbstractORMCriteria {
 	public final BlobExpression logo;
 	public final StringExpression email;
 	public final StringExpression phone;
-	public final CollectionExpression process;
+	public final CollectionExpression company_process;
 	public final CollectionExpression document_type;
 	public final CollectionExpression user_detail;
 	public final CollectionExpression group_detail;
@@ -42,7 +42,7 @@ public class CompanyCriteria extends AbstractORMCriteria {
 		logo = new BlobExpression("logo", this);
 		email = new StringExpression("email", this);
 		phone = new StringExpression("phone", this);
-		process = new CollectionExpression("process", this);
+		company_process = new CollectionExpression("company_process", this);
 		document_type = new CollectionExpression("document_type", this);
 		user_detail = new CollectionExpression("user_detail", this);
 		group_detail = new CollectionExpression("group_detail", this);
@@ -60,8 +60,8 @@ public class CompanyCriteria extends AbstractORMCriteria {
 		this(pwfms.PWFMPersistentManager.instance().getSession());
 	}
 	
-	public ProcessCriteria createProcessCriteria() {
-		return new ProcessCriteria(createCriteria("process"));
+	public Company_processCriteria createCompany_processCriteria() {
+		return new Company_processCriteria(createCriteria("company_process"));
 	}
 	
 	public Document_typeCriteria createDocument_typeCriteria() {

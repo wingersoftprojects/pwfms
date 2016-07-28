@@ -370,7 +370,7 @@ public class Task_activity_doc implements Serializable {
 			}
 			
 			if(getDocument_type() != null) {
-				getDocument_type().getTask_document().remove(this);
+				getDocument_type().getTask_activity_doc().remove(this);
 			}
 			
 			return delete();
@@ -388,7 +388,7 @@ public class Task_activity_doc implements Serializable {
 			}
 			
 			if(getDocument_type() != null) {
-				getDocument_type().getTask_document().remove(this);
+				getDocument_type().getTask_activity_doc().remove(this);
 			}
 			
 			try {

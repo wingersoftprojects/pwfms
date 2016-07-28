@@ -365,8 +365,8 @@ public class Activity implements Serializable {
 	
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
-			if(getProcess() != null) {
-				getProcess().getActivity().remove(this);
+			if(getCompany_process() != null) {
+				getCompany_process().getActivity().remove(this);
 			}
 			
 			pwfms.Section[] lSections = (pwfms.Section[])getSection().toArray(new pwfms.Section[getSection().size()]);
@@ -403,8 +403,8 @@ public class Activity implements Serializable {
 	
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
-			if(getProcess() != null) {
-				getProcess().getActivity().remove(this);
+			if(getCompany_process() != null) {
+				getCompany_process().getActivity().remove(this);
 			}
 			
 			pwfms.Section[] lSections = (pwfms.Section[])getSection().toArray(new pwfms.Section[getSection().size()]);
@@ -453,10 +453,10 @@ public class Activity implements Serializable {
 	@Column(name="activity_name", nullable=false, length=100)	
 	private String activity_name;
 	
-	@ManyToOne(targetEntity=pwfms.Process.class, fetch=FetchType.LAZY)	
+	@ManyToOne(targetEntity=pwfms.Company_process.class, fetch=FetchType.LAZY)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
-	@JoinColumns({ @JoinColumn(name="process_id", referencedColumnName="process_id", nullable=false) })	
-	private pwfms.Process process;
+	@JoinColumns({ @JoinColumn(name="company_process_id", referencedColumnName="company_process_id", nullable=false) })	
+	private pwfms.Company_process company_process;
 	
 	@Column(name="is_start", nullable=true, length=1)	
 	private Integer is_start;
@@ -613,12 +613,12 @@ public class Activity implements Serializable {
 		return flag_after;
 	}
 	
-	public void setProcess(pwfms.Process value) {
-		this.process = value;
+	public void setCompany_process(pwfms.Company_process value) {
+		this.company_process = value;
 	}
 	
-	public pwfms.Process getProcess() {
-		return process;
+	public pwfms.Company_process getCompany_process() {
+		return company_process;
 	}
 	
 	public void setSection(java.util.Set value) {

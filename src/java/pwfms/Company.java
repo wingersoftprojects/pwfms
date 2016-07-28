@@ -365,9 +365,9 @@ public class Company implements Serializable {
 	
 	public boolean deleteAndDissociate()throws PersistentException {
 		try {
-			pwfms.Process[] lProcesss = (pwfms.Process[])getProcess().toArray(new pwfms.Process[getProcess().size()]);
-			for(int i = 0; i < lProcesss.length; i++) {
-				lProcesss[i].setCompany(null);
+			pwfms.Company_process[] lCompany_processs = (pwfms.Company_process[])getCompany_process().toArray(new pwfms.Company_process[getCompany_process().size()]);
+			for(int i = 0; i < lCompany_processs.length; i++) {
+				lCompany_processs[i].setCompany(null);
 			}
 			pwfms.Document_type[] lDocument_types = (pwfms.Document_type[])getDocument_type().toArray(new pwfms.Document_type[getDocument_type().size()]);
 			for(int i = 0; i < lDocument_types.length; i++) {
@@ -407,9 +407,9 @@ public class Company implements Serializable {
 	
 	public boolean deleteAndDissociate(org.orm.PersistentSession session)throws PersistentException {
 		try {
-			pwfms.Process[] lProcesss = (pwfms.Process[])getProcess().toArray(new pwfms.Process[getProcess().size()]);
-			for(int i = 0; i < lProcesss.length; i++) {
-				lProcesss[i].setCompany(null);
+			pwfms.Company_process[] lCompany_processs = (pwfms.Company_process[])getCompany_process().toArray(new pwfms.Company_process[getCompany_process().size()]);
+			for(int i = 0; i < lCompany_processs.length; i++) {
+				lCompany_processs[i].setCompany(null);
 			}
 			pwfms.Document_type[] lDocument_types = (pwfms.Document_type[])getDocument_type().toArray(new pwfms.Document_type[getDocument_type().size()]);
 			for(int i = 0; i < lDocument_types.length; i++) {
@@ -473,10 +473,10 @@ public class Company implements Serializable {
 	@Column(name="phone", nullable=true, length=50)	
 	private String phone;
 	
-	@OneToMany(mappedBy="company", targetEntity=pwfms.Process.class)	
+	@OneToMany(mappedBy="company", targetEntity=pwfms.Company_process.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
-	private java.util.Set process = new java.util.HashSet();
+	private java.util.Set company_process = new java.util.HashSet();
 	
 	@OneToMany(mappedBy="company", targetEntity=pwfms.Document_type.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -565,12 +565,12 @@ public class Company implements Serializable {
 		return phone;
 	}
 	
-	public void setProcess(java.util.Set value) {
-		this.process = value;
+	public void setCompany_process(java.util.Set value) {
+		this.company_process = value;
 	}
 	
-	public java.util.Set getProcess() {
-		return process;
+	public java.util.Set getCompany_process() {
+		return company_process;
 	}
 	
 	

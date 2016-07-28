@@ -34,7 +34,7 @@ public class Data_elementCriteria extends AbstractORMCriteria {
 	public final CollectionExpression activity_data_element;
 	public final CollectionExpression entity_type_data_element;
 	public final CollectionExpression entity_detail;
-	public final CollectionExpression task_data_element;
+	public final CollectionExpression task_activity_de;
 	
 	public Data_elementCriteria(Criteria criteria) {
 		super(criteria);
@@ -53,7 +53,7 @@ public class Data_elementCriteria extends AbstractORMCriteria {
 		activity_data_element = new CollectionExpression("activity_data_element", this);
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this);
 		entity_detail = new CollectionExpression("entity_detail", this);
-		task_data_element = new CollectionExpression("task_data_element", this);
+		task_activity_de = new CollectionExpression("task_activity_de", this);
 	}
 	
 	public Data_elementCriteria(PersistentSession session) {
@@ -84,8 +84,8 @@ public class Data_elementCriteria extends AbstractORMCriteria {
 		return new Entity_detailCriteria(createCriteria("entity_detail"));
 	}
 	
-	public Task_activity_deCriteria createTask_data_elementCriteria() {
-		return new Task_activity_deCriteria(createCriteria("task_data_element"));
+	public Task_activity_deCriteria createTask_activity_deCriteria() {
+		return new Task_activity_deCriteria(createCriteria("task_activity_de"));
 	}
 	
 	public Data_element uniqueData_element() {

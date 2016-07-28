@@ -24,10 +24,10 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="process_id">
+    <Column name="company_process_id">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>process.process_id</ReferencedColumn>
+      <ReferencedColumn>company_process.company_process_id</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -521,10 +521,10 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="process_id">
+    <Column name="company_process_id">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>process.process_id</ReferencedColumn>
+      <ReferencedColumn>company_process.company_process_id</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -889,8 +889,8 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="process" PKClustered="0">
-    <Column name="process_id">
+  <Entity name="company_process" PKClustered="0">
+    <Column name="company_process_id">
       <PrimaryKey>true</PrimaryKey>
       <ForeignKey>false</ForeignKey>
       <Type>9</Type>
@@ -1539,18 +1539,18 @@
       <Column>user_detail_id</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKactivity116429">
+  <ForeignKey name="FKactivity546168">
     <ReferenceTable>activity</ReferenceTable>
-    <ReferencedTable>process</ReferencedTable>
+    <ReferencedTable>company_process</ReferencedTable>
     <Columns>
-      <Column>process_id</Column>
+      <Column>company_process_id</Column>
     </Columns>
     <RefColumns>
-      <Column>process_id</Column>
+      <Column>company_process_id</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKprocess382328">
-    <ReferenceTable>process</ReferenceTable>
+  <ForeignKey name="FKcompany_pr462362">
+    <ReferenceTable>company_process</ReferenceTable>
     <ReferencedTable>company</ReferencedTable>
     <Columns>
       <Column>company_id</Column>
@@ -1789,14 +1789,14 @@
       <Column>data_element_id</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKtask404836">
+  <ForeignKey name="FKtask975096">
     <ReferenceTable>task</ReferenceTable>
-    <ReferencedTable>process</ReferencedTable>
+    <ReferencedTable>company_process</ReferencedTable>
     <Columns>
-      <Column>process_id</Column>
+      <Column>company_process_id</Column>
     </Columns>
     <RefColumns>
-      <Column>process_id</Column>
+      <Column>company_process_id</Column>
     </RefColumns>
   </ForeignKey>
   <ForeignKey name="FKtask487465">

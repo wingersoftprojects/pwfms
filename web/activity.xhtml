@@ -25,8 +25,8 @@
                     <f:event listener="#{data_element_categoryBean.initializelist()}" type="preRenderView" />
                     <f:event listener="#{outcomeBean.init()}" type="preRenderView" />
                     <f:event listener="#{outcomeBean.initializelist()}" type="preRenderView" />
-                    <f:event listener="#{processBean.init()}" type="preRenderView" />
-                    <f:event listener="#{processBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{company_processBean.init()}" type="preRenderView" />
+                    <f:event listener="#{company_processBean.initializelist()}" type="preRenderView" />
                     <f:event listener="#{activityBean.init()}" type="preRenderView" />
                     <f:event listener="#{activityBean.initializelist()}" type="preRenderView" />
                     <f:event listener="#{activity_outcomeBean.init()}" type="preRenderView" />
@@ -48,9 +48,9 @@
                                 <p:panelGrid id="panel_grid1" columns="1">
                                     <p:panelGrid id="panel_detail1" columns="3">
                                         <p:outputLabel value="Select Process:" for="process1"/>
-                                        <p:selectOneMenu id="process1" value="#{activityBean.selected.process}" style="width:125px" converter="processConverter" rendered="true" requiredMessage="Process is required">
+                                        <p:selectOneMenu id="process1" value="#{activityBean.selected.company_process}" style="width:125px" converter="company_processConverter" rendered="true" requiredMessage="Process is required">
                                             <f:selectItem itemLabel="" />
-                                            <f:selectItems value="#{processBean.ts}" var="item" itemLabel="#{item.process_name}" itemValue="#{item}"/>
+                                            <f:selectItems value="#{company_processBean.ts}" var="item" itemLabel="#{item.process_name}" itemValue="#{item}"/>
                                             <p:ajax process="@this"/>
                                         </p:selectOneMenu>
                                         <p:commandButton value="USE SELECTED PROCESS" process="panel_detail1" update="@form"/>
@@ -61,7 +61,7 @@
                                 <p:panelGrid id="panel_grid2" columns="2">
                                     <p:panelGrid id="panel_detail2" columns="2">
                                         <p:outputLabel value="Process:"/>
-                                        <p:outputLabel value="#{activityBean.selected.process.process_name}" style="font-weight: bold;"/>
+                                        <p:outputLabel value="#{activityBean.selected.company_process.process_name}" style="font-weight: bold;"/>
                                         <p:outputLabel value="Activity Name:" for="activity_name"/>
                                         <p:inputText id="activity_name" value="#{activityBean.selected.activity_name}" required="true" requiredMessage="Activity name field is Required"/>
                                         <p:outputLabel value="Is Start?:" for="is_start"/>
@@ -114,7 +114,7 @@
                                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate="2,10,12,30,20,100">
                                         <p:column headerText="Process">
-                                            <h:outputText value="#{item.process.process_name}"/>
+                                            <h:outputText value="#{item.company_process.process_name}"/>
                                         </p:column>
                                         <p:column headerText="Activity Name">
                                             <h:outputText value="#{item.activity_name}"/>

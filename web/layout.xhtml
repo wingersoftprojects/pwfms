@@ -30,23 +30,23 @@
                                         <div class="ui-grid-col-9" style="margin-top: 2%">
                                             <h:form id="menuform">
 
-                                                <p:menubar>      
-                                                   <p:submenu label="Run Time"> 
+                                                <p:menubar>
+                                                    <p:menuitem value="Home" action="home?faces-redirect=true" rendered="#{1==1}"/>  
+                                                    <p:submenu label="Run Time"> 
                                                         <p:menuitem value="Start New Process" action="new_process?faces-redirect=true" rendered="#{1==1}"/>  
                                                         <p:menuitem value="Manage Task" action="manage_task?faces-redirect=true" rendered="#{1==1}"/> 
                                                         <p:menuitem value="Manage Entity" action="manage_entity?faces-redirect=true" rendered="#{1==1}"/> 
                                                     </p:submenu>
-                                                    
+
                                                     <p:submenu label="Definition"> 
                                                         <p:menuitem value="Define Company" action="company?faces-redirect=true" rendered="#{1==1}"/> 
                                                         <p:menuitem value="Define Process" action="activity?faces-redirect=true" rendered="#{1==1}"/> 
                                                         <p:menuitem value="Define User" action="userdetail?faces-redirect=true" rendered="#{1==1}"/>  
                                                     </p:submenu>
-                                                    
+
                                                     <p:submenu label="Reporting"> 
-                                                        <p:menuitem value="Report 1" action="home?faces-redirect=true" rendered="#{1==1}"/> 
-                                                        <p:menuitem value="Report 2" action="home?faces-redirect=true" rendered="#{1==1}"/> 
-                                                        <p:menuitem value="Report 3" action="home?faces-redirect=true" rendered="#{1==1}"/>  
+                                                        <p:menuitem value="Pending Activites" action="report_pend_act?faces-redirect=true" rendered="#{1==1}"/> 
+                                                        <p:menuitem value="Completed Activities" action="report_comp_act?faces-redirect=true" rendered="#{1==1}"/> 
                                                     </p:submenu>
 
                                                     <p:submenu label="#{loginBean.user_detail.user_name}" style="float: right; background: darkorange;" rendered="#{1==1}">  
@@ -74,27 +74,28 @@
                                     <h:form id="notificationform">
                                         <p:panel header="Tasks">
                                             <p:accordionPanel multiple="true" activeIndex="-1">
-                                                <p:tab title="OVERDUE TASKS (4)" titleStyle="background: red !important; color:black !important">
+                                                <p:tab title="PENDING ACTIVITIES (#{task_activityBean.pending_task_activities.size()})" titleStyle="background: red !important; color:black !important">
                                                     <p:panel  class="overduetasks notifications">
-                                                        <p:commandLink value="Approve Registration" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Validate Checklist for GMC EOI" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Submit Bid for URA ERP" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Generate Reg Number for Jude" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        <c:forEach var="var" items="#{task_activityBean.pending_task_activities}" >
+                                                            <p:commandLink value="#{var.activity.activity_name}" update="@form" style="color: red;" ajax="false" action="manage_task?faces-redirect=true"/>
+                                                            <f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        </c:forEach>
                                                     </p:panel>
                                                 </p:tab>
-                                                <p:tab title="FLAGGED TASKS (5)" titleStyle="background: yellow !important; color:black !important">
+                                                <p:tab title="PENDING PROCESS TASKS(#{taskBean.pending_tasks.size()})" titleStyle="background: yellow !important; color:black !important">
                                                     <p:panel  class="flaggedtasks notifications">
-                                                            <p:commandLink value="Flagged TAsk 1" update="@form" style="color: black" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                            <p:commandLink value="Flagged TAsk 2" update="@form" style="color: black" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                            <p:commandLink value="Flagged TAsk 3" update="@form" style="color: black" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                            <p:commandLink value="Flagged TAsk 4" update="@form" style="color: black" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                            <p:commandLink value="Flagged TAsk 5" update="@form" style="color: black" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
+                                                        <c:forEach var="var" items="#{taskBean.pending_tasks}" >
+                                                            <p:commandLink value="#{var.company_process.process_name}" update="@form" style="color: black;" ajax="false" action="new_process?faces-redirect=true"/>
+                                                            <f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        </c:forEach>
                                                     </p:panel>
                                                 </p:tab>
-                                                <p:tab title="PENDING TASKS (2)" titleStyle="background: greenyellow; color:black !important">
+                                                <p:tab title="COMPLETED ACTIVITIES (#{task_activityBean.completed_task_activities.size()})" titleStyle="background: greenyellow; color:black !important">
                                                     <p:panel  class="pendingtasks notifications">
-                                                        <p:commandLink value="Upload Registration DOCs for Ddembe" update="@form" style="color: black;" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Validate Registration Details for Catherine.K" update="@form" style="color: black;" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        <c:forEach var="var" items="#{task_activityBean.completed_task_activities}" >
+                                                            <p:commandLink value="#{var.activity.activity_name}" update="@form" style="color: black;" ajax="false" action="manage_task?faces-redirect=true"/>
+                                                            <f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        </c:forEach>
                                                     </p:panel>
                                                 </p:tab>
                                             </p:accordionPanel>

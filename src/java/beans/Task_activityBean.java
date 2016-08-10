@@ -13,22 +13,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import org.orm.PersistentException;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.ChartSeries;
 import pwfms.Activity;
 import pwfms.Activity_data_element;
 import pwfms.Activity_document_type;
 import pwfms.Activity_entity_type;
 import pwfms.Company_process;
-import pwfms.Entity_detail;
-import pwfms.Entity_instance;
 import pwfms.PWFMPersistentManager;
 import pwfms.Task;
 import pwfms.Task_activity_de;
 import pwfms.Task_activity_doc;
 import pwfms.Task_activity_entity;
+import utilities.GeneralUtilities;
 
 /**
  *
@@ -41,6 +47,9 @@ public class Task_activityBean extends AbstractBean<Task_activity> implements Se
     private List<Task_activity_de> task_activity_des;
     private List<Task_activity_doc> task_activity_docs;
     private List<Task_activity_entity> task_activity_entities;
+    private List<Task_activity> pending_task_activities;
+    private List<Task_activity> completed_task_activities;
+    private BarChartModel task_activityModel;
 
     public Task_activityBean() {
         super(Task_activity.class);
@@ -258,6 +267,85 @@ public class Task_activityBean extends AbstractBean<Task_activity> implements Se
      */
     public void setTask_activity_entities(List<Task_activity_entity> task_activity_entities) {
         this.task_activity_entities = task_activity_entities;
+    }
+
+    /**
+     * @return the pending_task_activities
+     */
+    public List<Task_activity> getPending_task_activities() {
+        try {
+            pending_task_activities = Task_activity.queryTask_activity("status='PENDING'", null);
+        } catch (PersistentException ex) {
+            Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pending_task_activities;
+    }
+
+    /**
+     * @param pending_task_activities the pending_task_activities to set
+     */
+    public void setPending_task_activities(List<Task_activity> pending_task_activities) {
+        this.pending_task_activities = pending_task_activities;
+    }
+
+    /**
+     * @return the completed_task_activities
+     */
+    public List<Task_activity> getCompleted_task_activities() {
+        try {
+            completed_task_activities = Task_activity.queryTask_activity("status='COMPLETE'", null);
+        } catch (PersistentException ex) {
+            Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return completed_task_activities;
+    }
+
+    /**
+     * @param completed_task_activities the completed_task_activities to set
+     */
+    public void setCompleted_task_activities(List<Task_activity> completed_task_activities) {
+        this.completed_task_activities = completed_task_activities;
+    }
+
+    /**
+     * @return the task_activityModel
+     */
+    public BarChartModel getTask_activityModel() {
+        BarChartModel model = new BarChartModel();
+        ChartSeries ser1 = new ChartSeries();
+        ser1.setLabel("Task Activities");
+        try {
+            String qString = "SELECT ta.status,count(ta.status) FROM Task_activity ta "
+                    + " "
+                    + "GROUP BY ta.status";
+            List<Object[]> result = PWFMPersistentManager.instance().getSession().createQuery(qString).list();
+            for (Object[] resultElement : result) {
+                long number = (long) resultElement[1];
+                ser1.set(resultElement[0], number);
+            }
+        } catch (PersistentException | NullPointerException ex) {
+            Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage("List", new FacesMessage(ex.getMessage()));
+            GeneralUtilities.clearsession();
+        }
+        model.addSeries(ser1);
+        task_activityModel = model;
+        task_activityModel.setLegendPosition("e");
+        task_activityModel.setShowPointLabels(true);
+        task_activityModel.getAxes().put(AxisType.X, new CategoryAxis("Status"));
+        Axis yAxis = task_activityModel.getAxis(AxisType.Y);
+        yAxis = task_activityModel.getAxis(AxisType.Y);
+        yAxis.setLabel("Number");
+        yAxis.setMin(0);
+        yAxis.setMax(15);
+        return task_activityModel;
+    }
+
+    /**
+     * @param task_activityModel the task_activityModel to set
+     */
+    public void setTask_activityModel(BarChartModel task_activityModel) {
+        this.task_activityModel = task_activityModel;
     }
 
 }

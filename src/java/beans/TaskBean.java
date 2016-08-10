@@ -9,12 +9,14 @@ import pwfms.Task;
 import java.io.Serializable;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import org.orm.PersistentException;
+import org.primefaces.model.chart.PieChartModel;
 import pwfms.Task_activity;
 
 /**
@@ -24,6 +26,10 @@ import pwfms.Task_activity;
 @ManagedBean
 @SessionScoped
 public class TaskBean extends AbstractBean<Task> implements Serializable {
+
+    private List<Task> pending_tasks;
+    private List<Task> completed_tasks;
+    private PieChartModel tasksModel;
 
     public TaskBean() {
         super(Task.class);
@@ -59,7 +65,7 @@ public class TaskBean extends AbstractBean<Task> implements Serializable {
             aSavedTask = Task.getTaskByORMID(aNewTaskId);
             //add new activity automatically
             //first get
-            if (aNewTaskId > 0 && null!=aSavedTask) {
+            if (aNewTaskId > 0 && null != aSavedTask) {
                 Task_activityBean tab = new Task_activityBean();
                 Task_activity ta = new Task_activity();
                 ta.setTask(aSavedTask);
@@ -77,5 +83,63 @@ public class TaskBean extends AbstractBean<Task> implements Serializable {
         } catch (PersistentException ex) {
             Logger.getLogger(TaskBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * @return the pending_tasks
+     */
+    public List<Task> getPending_tasks() {
+        try {
+            pending_tasks = Task.queryTask("current_status='PENDING'", null);
+        } catch (PersistentException ex) {
+            Logger.getLogger(TaskBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pending_tasks;
+    }
+
+    /**
+     * @param pending_tasks the pending_tasks to set
+     */
+    public void setPending_tasks(List<Task> pending_tasks) {
+        this.pending_tasks = pending_tasks;
+    }
+
+    /**
+     * @return the tasksModel
+     */
+    public PieChartModel getTasksModel() {
+        tasksModel = new PieChartModel();
+        tasksModel.set("Pending Process Tasks",pending_tasks.size());
+        tasksModel.set("Completed Process Tasks",completed_tasks.size());
+        tasksModel.setTitle("Process Tasks");
+        tasksModel.setLegendPosition("w");
+        tasksModel.setShowDataLabels(true);
+        return tasksModel;
+    }
+
+    /**
+     * @param tasksModel the tasksModel to set
+     */
+    public void setTasksModel(PieChartModel tasksModel) {
+        this.tasksModel = tasksModel;
+    }
+
+    /**
+     * @return the completed_tasks
+     */
+    public List<Task> getCompleted_tasks() {
+        try {
+            completed_tasks = Task.queryTask("current_status='COMPLETE'", null);
+        } catch (PersistentException ex) {
+            Logger.getLogger(TaskBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return completed_tasks;
+    }
+
+    /**
+     * @param completed_tasks the completed_tasks to set
+     */
+    public void setCompleted_tasks(List<Task> completed_tasks) {
+        this.completed_tasks = completed_tasks;
     }
 }

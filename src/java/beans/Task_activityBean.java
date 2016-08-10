@@ -7,7 +7,9 @@ package beans;
 
 import pwfms.Task_activity;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,9 +21,9 @@ import pwfms.Activity;
 import pwfms.Activity_data_element;
 import pwfms.Activity_document_type;
 import pwfms.Activity_entity_type;
-import pwfms.Activity_outcome;
 import pwfms.Company_process;
-import pwfms.Entity_type_data_element;
+import pwfms.Entity_detail;
+import pwfms.Entity_instance;
 import pwfms.PWFMPersistentManager;
 import pwfms.Task;
 import pwfms.Task_activity_de;
@@ -125,7 +127,7 @@ public class Task_activityBean extends AbstractBean<Task_activity> implements Se
             for (int i = 0; i < aets.size(); i++) {
                 Activity_entity_type aet = new Activity_entity_type();
                 aet = aets.get(i);
-                
+
                 Task_activity_entity taet = new Task_activity_entity();
                 taet.setEntity_type(aet.getEntity_type());
                 taet.setData_element(taet.getData_element());
@@ -136,6 +138,84 @@ public class Task_activityBean extends AbstractBean<Task_activity> implements Se
             Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void completeTaskActivity(int user_detail_id) {
+        try {
+            Task_activity task_activity = new Task_activity();
+            //1.update current ta Status
+            if (super.getSelected().getOutcome().getIs_success() == 1) {
+                super.getSelected().setStatus("COMPLETE");
+            } else {
+                super.getSelected().setStatus("PENDING");
+            }
+            super.getSelected().setEnd_date(new Timestamp(new Date().getTime()));
+            task_activity = super.getSelected();
+            super.save(user_detail_id);
+
+            //2. Update the main task's status and date
+            TaskBean oldtb = new TaskBean();
+            oldtb.setSelected(task_activity.getTask());
+            oldtb.getSelected().setCurrent_status(task_activity.getStatus());
+            oldtb.getSelected().setCurrent_status_date(new Timestamp(new Date().getTime()));
+            oldtb.save_silent(user_detail_id);
+
+            //3.insert ades
+            try {
+                if (task_activity.getTask_activity_id() > 0) {
+                    Task_activity_deBean tadeb = new Task_activity_deBean();
+                    for (Task_activity_de tade : this.getTask_activity_des()) {
+                        tade.setTask_activity(task_activity);
+                        tadeb.setSelected(tade);
+                        tadeb.save_silent(user_detail_id);
+                    }
+                    this.getTask_activity_des().clear();
+                }
+            } catch (NullPointerException npe) {
+                Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, npe);
+            }
+            //4.insert adoc
+            try {
+                if (task_activity.getTask_activity_id() > 0) {
+                    Task_activity_docBean tadocb = new Task_activity_docBean();
+                    for (Task_activity_doc tadoc : this.getTask_activity_docs()) {
+                        tadoc.setTask_activity(task_activity);
+                        tadocb.setSelected(tadoc);
+                        tadocb.save_silent(user_detail_id);
+                    }
+                    this.getTask_activity_docs().clear();
+                }
+            } catch (NullPointerException npe) {
+                Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, npe);
+            }
+
+            //5. insert new based on next one
+            Task_activityBean newtab = new Task_activityBean();
+            Task_activity ta2 = new Task_activity();
+            int to_activity_id = 0;
+            try {
+                if (task_activity.getOutcome().getIs_success() == 1) {
+                    to_activity_id = task_activity.getActivity().getTo_activity_id_success();
+                } else {
+                    to_activity_id = task_activity.getActivity().getTo_activity_id_failure();
+                }
+                ta2.setActivity(Activity.getActivityByORMID(to_activity_id));
+            } catch (NullPointerException | PersistentException npe) {
+                Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, npe);
+            }
+            ta2.setTask(task_activity.getTask());
+            ta2.setStart_date(new Timestamp(new Date().getTime()));
+            ta2.setAdd_date(new Timestamp(new Date().getTime()));
+            ta2.setAdded_by(user_detail_id);
+            ta2.setActivity_assigned_to(loginBean.getUser_detail());
+            ta2.setStatus("PENDING");
+            ta2.setComment("");
+            ta2.setAdded_by(user_detail_id);
+            newtab.setSelected(ta2);
+            newtab.save_silent(user_detail_id);
+        } catch (Exception e) {
+            Logger.getLogger(Task_activityBean.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**

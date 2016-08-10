@@ -18,7 +18,6 @@ import org.orm.PersistentException;
 import pwfms.Company_process;
 import pwfms.PWFMPersistentManager;
 import pwfms.Task;
-import pwfms.Task_activity;
 
 /**
  *

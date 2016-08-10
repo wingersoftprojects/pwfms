@@ -7,8 +7,6 @@ package beans;
 
 import pwfms.Task;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.logging.Level;
@@ -17,11 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import org.orm.PersistentException;
-import org.orm.PersistentTransaction;
-import pwfms.PWFMPersistentManager;
 import pwfms.Task_activity;
-import pwfms.User_detail;
-import utilities.GeneralUtilities;
 
 /**
  *
@@ -66,7 +60,6 @@ public class TaskBean extends AbstractBean<Task> implements Serializable {
             //add new activity automatically
             //first get
             if (aNewTaskId > 0 && null!=aSavedTask) {
-
                 Task_activityBean tab = new Task_activityBean();
                 Task_activity ta = new Task_activity();
                 ta.setTask(aSavedTask);

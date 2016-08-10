@@ -758,9 +758,20 @@
     <Column name="document_value">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
-      <Type>23</Type>
+      <Type>26</Type>
       <Length>0</Length>
-      <Nullable>false</Nullable>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="document_url">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>250</Length>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -880,6 +891,18 @@
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
       <ReferencedColumn>entity_type.entity_type_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="entity_instance_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>entity_instance.entity_instance_id</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>false</Nullable>
@@ -1431,7 +1454,8 @@
     </Column>
     <Column name="activity_assigned_to">
       <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>user_detail.user_detail_id</ReferencedColumn>
       <Type>9</Type>
       <Length>11</Length>
       <Nullable>true</Nullable>
@@ -1503,6 +1527,114 @@
       <Type>27</Type>
       <Length>250</Length>
       <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="entity_instance_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>entity_instance.entity_instance_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
+  <Entity name="task_activity_entity" PKClustered="0">
+    <Column name="task_activity_entity_id">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="task_activity_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>task_activity.task_activity_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="entity_type_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>entity_type.entity_type_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="data_element_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>data_element.data_element_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="data_element_value">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>250</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+  </Entity>
+  <Entity name="entity_instance" PKClustered="0">
+    <Column name="entity_instance_id">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="entity_instance_name">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>27</Type>
+      <Length>100</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="entity_type_id">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>entity_type.entity_type_id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>11</Length>
+      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -1887,6 +2019,76 @@
     </Columns>
     <RefColumns>
       <Column>activity_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKtask_activ294571">
+    <ReferenceTable>task_activity</ReferenceTable>
+    <ReferencedTable>user_detail</ReferencedTable>
+    <Columns>
+      <Column>activity_assigned_to</Column>
+    </Columns>
+    <RefColumns>
+      <Column>user_detail_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKtask_activ139192">
+    <ReferenceTable>task_activity_entity</ReferenceTable>
+    <ReferencedTable>task_activity</ReferencedTable>
+    <Columns>
+      <Column>task_activity_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>task_activity_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKtask_activ881223">
+    <ReferenceTable>task_activity_entity</ReferenceTable>
+    <ReferencedTable>entity_type</ReferencedTable>
+    <Columns>
+      <Column>entity_type_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>entity_type_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKtask_activ174243">
+    <ReferenceTable>task_activity_entity</ReferenceTable>
+    <ReferencedTable>data_element</ReferencedTable>
+    <Columns>
+      <Column>data_element_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>data_element_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKentity_det920277">
+    <ReferenceTable>entity_detail</ReferenceTable>
+    <ReferencedTable>entity_instance</ReferencedTable>
+    <Columns>
+      <Column>entity_instance_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>entity_instance_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKtask_activ210793">
+    <ReferenceTable>task_activity</ReferenceTable>
+    <ReferencedTable>entity_instance</ReferencedTable>
+    <Columns>
+      <Column>entity_instance_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>entity_instance_id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKentity_ins590992">
+    <ReferenceTable>entity_instance</ReferenceTable>
+    <ReferencedTable>entity_type</ReferencedTable>
+    <Columns>
+      <Column>entity_type_id</Column>
+    </Columns>
+    <RefColumns>
+      <Column>entity_type_id</Column>
     </RefColumns>
   </ForeignKey>
 </Model>

@@ -389,6 +389,10 @@ public class Data_element implements Serializable {
 			for(int i = 0; i < lTask_activity_des.length; i++) {
 				lTask_activity_des[i].setData_element(null);
 			}
+			pwfms.Task_activity_entity[] lTask_activity_entitys = (pwfms.Task_activity_entity[])getTask_activity_entity().toArray(new pwfms.Task_activity_entity[getTask_activity_entity().size()]);
+			for(int i = 0; i < lTask_activity_entitys.length; i++) {
+				lTask_activity_entitys[i].setData_element(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -422,6 +426,10 @@ public class Data_element implements Serializable {
 			pwfms.Task_activity_de[] lTask_activity_des = (pwfms.Task_activity_de[])getTask_activity_de().toArray(new pwfms.Task_activity_de[getTask_activity_de().size()]);
 			for(int i = 0; i < lTask_activity_des.length; i++) {
 				lTask_activity_des[i].setData_element(null);
+			}
+			pwfms.Task_activity_entity[] lTask_activity_entitys = (pwfms.Task_activity_entity[])getTask_activity_entity().toArray(new pwfms.Task_activity_entity[getTask_activity_entity().size()]);
+			for(int i = 0; i < lTask_activity_entitys.length; i++) {
+				lTask_activity_entitys[i].setData_element(null);
 			}
 			try {
 				session.delete(this);
@@ -492,6 +500,11 @@ public class Data_element implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task_activity_de = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="data_element", targetEntity=pwfms.Task_activity_entity.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set task_activity_entity = new java.util.HashSet();
 	
 	private void setData_element_id(int value) {
 		this.data_element_id = value;
@@ -610,6 +623,15 @@ public class Data_element implements Serializable {
 	
 	public java.util.Set getTask_activity_de() {
 		return task_activity_de;
+	}
+	
+	
+	public void setTask_activity_entity(java.util.Set value) {
+		this.task_activity_entity = value;
+	}
+	
+	public java.util.Set getTask_activity_entity() {
+		return task_activity_entity;
 	}
 	
 	

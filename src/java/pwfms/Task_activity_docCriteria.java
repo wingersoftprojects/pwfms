@@ -25,6 +25,7 @@ public class Task_activity_docCriteria extends AbstractORMCriteria {
 	public final IntegerExpression document_typeId;
 	public final AssociationExpression document_type;
 	public final BlobExpression document_value;
+	public final StringExpression document_url;
 	
 	public Task_activity_docCriteria(Criteria criteria) {
 		super(criteria);
@@ -34,6 +35,7 @@ public class Task_activity_docCriteria extends AbstractORMCriteria {
 		document_typeId = new IntegerExpression("document_type.document_type_id", this);
 		document_type = new AssociationExpression("document_type", this);
 		document_value = new BlobExpression("document_value", this);
+		document_url = new StringExpression("document_url", this);
 	}
 	
 	public Task_activity_docCriteria(PersistentSession session) {

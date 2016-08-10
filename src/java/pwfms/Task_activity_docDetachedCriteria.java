@@ -25,6 +25,7 @@ public class Task_activity_docDetachedCriteria extends AbstractORMDetachedCriter
 	public final IntegerExpression document_typeId;
 	public final AssociationExpression document_type;
 	public final BlobExpression document_value;
+	public final StringExpression document_url;
 	
 	public Task_activity_docDetachedCriteria() {
 		super(pwfms.Task_activity_doc.class, pwfms.Task_activity_docCriteria.class);
@@ -34,6 +35,7 @@ public class Task_activity_docDetachedCriteria extends AbstractORMDetachedCriter
 		document_typeId = new IntegerExpression("document_type.document_type_id", this.getDetachedCriteria());
 		document_type = new AssociationExpression("document_type", this.getDetachedCriteria());
 		document_value = new BlobExpression("document_value", this.getDetachedCriteria());
+		document_url = new StringExpression("document_url", this.getDetachedCriteria());
 	}
 	
 	public Task_activity_docDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -44,6 +46,7 @@ public class Task_activity_docDetachedCriteria extends AbstractORMDetachedCriter
 		document_typeId = new IntegerExpression("document_type.document_type_id", this.getDetachedCriteria());
 		document_type = new AssociationExpression("document_type", this.getDetachedCriteria());
 		document_value = new BlobExpression("document_value", this.getDetachedCriteria());
+		document_url = new StringExpression("document_url", this.getDetachedCriteria());
 	}
 	
 	public Task_activityDetachedCriteria createTask_activityCriteria() {

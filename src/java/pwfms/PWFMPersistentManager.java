@@ -59,6 +59,8 @@ public class PWFMPersistentManager extends PersistentManager {
 		configuration.addAnnotatedClass(pwfms.User_detail.class);
 		configuration.addAnnotatedClass(pwfms.Entity_type.class);
 		configuration.addAnnotatedClass(pwfms.Task_activity.class);
+		configuration.addAnnotatedClass(pwfms.Task_activity_entity.class);
+		configuration.addAnnotatedClass(pwfms.Entity_instance.class);
 		configuration.buildMappings();
 		return configuration;
 	}

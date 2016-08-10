@@ -384,6 +384,10 @@ public class User_detail implements Serializable {
 			for(int i = 0; i < lTask1s.length; i++) {
 				lTask1s[i].setTask_assigned_to(null);
 			}
+			pwfms.Task_activity[] lTask_activitys = (pwfms.Task_activity[])getTask_activity().toArray(new pwfms.Task_activity[getTask_activity().size()]);
+			for(int i = 0; i < lTask_activitys.length; i++) {
+				lTask_activitys[i].setActivity_assigned_to(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -409,6 +413,10 @@ public class User_detail implements Serializable {
 			pwfms.Task[] lTask1s = (pwfms.Task[])getTask1().toArray(new pwfms.Task[getTask1().size()]);
 			for(int i = 0; i < lTask1s.length; i++) {
 				lTask1s[i].setTask_assigned_to(null);
+			}
+			pwfms.Task_activity[] lTask_activitys = (pwfms.Task_activity[])getTask_activity().toArray(new pwfms.Task_activity[getTask_activity().size()]);
+			for(int i = 0; i < lTask_activitys.length; i++) {
+				lTask_activitys[i].setActivity_assigned_to(null);
 			}
 			try {
 				session.delete(this);
@@ -475,6 +483,11 @@ public class User_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task1 = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="activity_assigned_to", targetEntity=pwfms.Task_activity.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set task_activity = new java.util.HashSet();
 	
 	private void setUser_detail_id(int value) {
 		this.user_detail_id = value;
@@ -592,6 +605,15 @@ public class User_detail implements Serializable {
 	
 	public java.util.Set getTask1() {
 		return task1;
+	}
+	
+	
+	public void setTask_activity(java.util.Set value) {
+		this.task_activity = value;
+	}
+	
+	public java.util.Set getTask_activity() {
+		return task_activity;
 	}
 	
 	

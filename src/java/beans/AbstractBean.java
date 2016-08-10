@@ -237,7 +237,35 @@ public abstract class AbstractBean<T> {
             Logger.getLogger(AbstractBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public int save_return(int aUserDetailId) {
+        Class noparams[] = {};
+        int id_return=0;
+        try {
+            PersistentTransaction transaction = PWFMPersistentManager.instance().getSession().beginTransaction();
+            Method method = selected.getClass().getMethod("get" + entityClass.getSimpleName() + "_id", noparams);
+            int id = (int) method.invoke(selected);
+            if (id > 0) {
+                PWFMPersistentManager.instance().getSession().merge(selected);
+            } else {
+                Method methodsave = selected.getClass().getMethod("save", noparams);
+                methodsave.invoke(selected);
+            }
+            transaction.commit();
+            //get saved Id before clearing
+            id_return = (int) method.invoke(selected);
+            clearCache(selected);
+            formstate = "view";
+            add();
+            initializelist();
+            saveMessage();
+        } catch (PersistentException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            GeneralUtilities.clearsession();
+            Logger.getLogger(AbstractBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id_return;
+    }
+   
     public void delete() {
         try {
             PersistentTransaction t = PWFMPersistentManager.instance().getSession().beginTransaction();

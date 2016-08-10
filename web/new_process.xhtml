@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:body>
+        <ui:composition template="./layout.xhtml">
+            <ui:define name="metadata">
+                <f:metadata>
+                    <f:event listener="#{companyBean.init()}" type="preRenderView" />
+                    <f:event listener="#{companyBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{entity_typeBean.init()}" type="preRenderView" />
+                    <f:event listener="#{entity_typeBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{data_elementBean.init()}" type="preRenderView" />
+                    <f:event listener="#{data_elementBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{document_typeBean.init()}" type="preRenderView" />
+                    <f:event listener="#{document_typeBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{entity_type_data_elementBean.init()}" type="preRenderView" />
+                    <f:event listener="#{entity_type_data_elementBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{data_element_categoryBean.init()}" type="preRenderView" />
+                    <f:event listener="#{data_element_categoryBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{outcomeBean.init()}" type="preRenderView" />
+                    <f:event listener="#{outcomeBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{company_processBean.init()}" type="preRenderView" />
+                    <f:event listener="#{company_processBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{activityBean.init()}" type="preRenderView" />
+                    <f:event listener="#{activityBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{activity_outcomeBean.init()}" type="preRenderView" />
+                    <f:event listener="#{activity_outcomeBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{activity_document_typeBean.init()}" type="preRenderView" />
+                    <f:event listener="#{activity_document_typeBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{sectionBean.init()}" type="preRenderView" />
+                    <f:event listener="#{sectionBean.initializelist()}" type="preRenderView" />
+                    <f:event listener="#{activity_data_elementBean.init()}" type="preRenderView" />
+                    <f:event listener="#{activity_data_elementBean.initializelist()}" type="preRenderView" />
+                </f:metadata>
+            </ui:define>
+            <ui:define name="content">
+                <f:view>
+                    <h:form id="main_form">
+                        <p:growl id="messages" showDetail="true" />
+                        <p:fieldset legend="Start New Process">
+                            <p:panelGrid id="panel_grid1" columns="1">
+                                <p:panelGrid id="panel_detail1" columns="2">
+                                    <p:outputLabel value="Select Process:" for="process1"/>
+                                    <p:selectOneMenu id="process1" value="#{taskBean.selected.company_process}" style="width:125px" converter="company_processConverter" required="true" requiredMessage="Process is required">
+                                        <f:selectItem itemLabel="" />
+                                        <f:selectItems value="#{company_processBean.ts}" var="item" itemLabel="#{item.process_name}" itemValue="#{item}"/>
+                                        <p:ajax process="@this"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Assigned To:" for="assign_to"/>
+                                    <p:selectOneMenu id="assign_to" value="#{taskBean.selected.task_assigned_to}" style="width:125px" converter="user_detailConverter" required="true" requiredMessage="Assign to is required">
+                                        <f:selectItem itemLabel="" />
+                                        <f:selectItems value="#{user_detailBean.ts}" var="item" itemLabel="#{item.first_name} #{item.second_name}" itemValue="#{item}"/>
+                                        <p:ajax process="@this"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Comment:" for="comment"/>
+                                    <p:inputText id="comment" value="#{taskBean.selected.comment}"/>
+                                    <p:commandButton value="SAVE" action="#{taskBean.saveNewTask(loginBean.user_detail.user_detail_id)}" icon="ui-icon-disk" process="panel_detail1" update="main_form:panel_grid1 main_form:messages"/>
+                                    <p:commandButton value="CLEAR" icon="ui-icon-cancel" action="#{taskBean.cancel()}" process="@this" update="main_form:panel_grid1 main_form:messages"/>
+                                </p:panelGrid>
+                                <p:dataTable id="data_table2" value="#{taskBean.ts}" var="item" rows="10"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="2,10,12,30,20,100">
+                                    <p:column headerText="Process">
+                                        <h:outputText value="#{item.company_process.process_name}"/>
+                                    </p:column>
+                                    <p:column headerText="Assigned To">
+                                        <h:outputText value="#{item.task_assigned_to.first_name}"/>
+                                    </p:column>
+                                    <p:column headerText="Start Date">
+                                        <h:outputText value="#{item.start_date}"/>
+                                    </p:column>
+                                    <p:column headerText="End Date">
+                                        <h:outputText value="#{item.end_date}"/>
+                                    </p:column>
+                                    <p:column headerText="Status">
+                                        <h:outputText value="#{item.current_status}"/>
+                                    </p:column>
+                                    <p:column headerText="Staus Date">
+                                        <h:outputText value="#{item.current_status_date}"/>
+                                    </p:column>
+                                    <p:column headerText="">
+                                        <p:commandButton value="Edit" action="#{taskBean.edit(item)}" process="@this" update="main_form:panel_grid1 main_form:messages" icon="ui-icon-search" title="View">
+                                        </p:commandButton>
+                                        <p:commandButton value="Del" actionListener="#{taskBean.delete(item)}" process="@this" update="main_form:panel_grid1 main_form:messages" icon="ui-icon-trash">
+                                            <p:confirm header="Confirmation" message="Are you sure you want to delete?" icon="ui-icon-alert" />
+                                        </p:commandButton>
+
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        </p:confirmDialog>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:panelGrid>
+                        </p:fieldset>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

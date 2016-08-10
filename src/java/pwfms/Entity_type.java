@@ -385,6 +385,14 @@ public class Entity_type implements Serializable {
 			for(int i = 0; i < lTask_activitys.length; i++) {
 				lTask_activitys[i].setEntity_type(null);
 			}
+			pwfms.Task_activity_entity[] lTask_activity_entitys = (pwfms.Task_activity_entity[])getTask_activity_entity().toArray(new pwfms.Task_activity_entity[getTask_activity_entity().size()]);
+			for(int i = 0; i < lTask_activity_entitys.length; i++) {
+				lTask_activity_entitys[i].setEntity_type(null);
+			}
+			pwfms.Entity_instance[] lEntity_instances = (pwfms.Entity_instance[])getEntity_instance().toArray(new pwfms.Entity_instance[getEntity_instance().size()]);
+			for(int i = 0; i < lEntity_instances.length; i++) {
+				lEntity_instances[i].setEntity_type(null);
+			}
 			return delete();
 		}
 		catch(Exception e) {
@@ -414,6 +422,14 @@ public class Entity_type implements Serializable {
 			pwfms.Task_activity[] lTask_activitys = (pwfms.Task_activity[])getTask_activity().toArray(new pwfms.Task_activity[getTask_activity().size()]);
 			for(int i = 0; i < lTask_activitys.length; i++) {
 				lTask_activitys[i].setEntity_type(null);
+			}
+			pwfms.Task_activity_entity[] lTask_activity_entitys = (pwfms.Task_activity_entity[])getTask_activity_entity().toArray(new pwfms.Task_activity_entity[getTask_activity_entity().size()]);
+			for(int i = 0; i < lTask_activity_entitys.length; i++) {
+				lTask_activity_entitys[i].setEntity_type(null);
+			}
+			pwfms.Entity_instance[] lEntity_instances = (pwfms.Entity_instance[])getEntity_instance().toArray(new pwfms.Entity_instance[getEntity_instance().size()]);
+			for(int i = 0; i < lEntity_instances.length; i++) {
+				lEntity_instances[i].setEntity_type(null);
 			}
 			try {
 				session.delete(this);
@@ -461,6 +477,16 @@ public class Entity_type implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task_activity = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="entity_type", targetEntity=pwfms.Task_activity_entity.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set task_activity_entity = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="entity_type", targetEntity=pwfms.Entity_instance.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set entity_instance = new java.util.HashSet();
 	
 	private void setEntity_type_id(int value) {
 		this.entity_type_id = value;
@@ -523,6 +549,24 @@ public class Entity_type implements Serializable {
 	
 	public java.util.Set getTask_activity() {
 		return task_activity;
+	}
+	
+	
+	public void setTask_activity_entity(java.util.Set value) {
+		this.task_activity_entity = value;
+	}
+	
+	public java.util.Set getTask_activity_entity() {
+		return task_activity_entity;
+	}
+	
+	
+	public void setEntity_instance(java.util.Set value) {
+		this.entity_instance = value;
+	}
+	
+	public java.util.Set getEntity_instance() {
+		return entity_instance;
 	}
 	
 	

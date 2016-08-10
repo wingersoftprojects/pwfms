@@ -34,6 +34,7 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	public final CollectionExpression group_user;
 	public final CollectionExpression task;
 	public final CollectionExpression task1;
+	public final CollectionExpression task_activity;
 	
 	public User_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -52,6 +53,7 @@ public class User_detailCriteria extends AbstractORMCriteria {
 		group_user = new CollectionExpression("group_user", this);
 		task = new CollectionExpression("task", this);
 		task1 = new CollectionExpression("task1", this);
+		task_activity = new CollectionExpression("task_activity", this);
 	}
 	
 	public User_detailCriteria(PersistentSession session) {
@@ -76,6 +78,10 @@ public class User_detailCriteria extends AbstractORMCriteria {
 	
 	public TaskCriteria createTask1Criteria() {
 		return new TaskCriteria(createCriteria("task1"));
+	}
+	
+	public Task_activityCriteria createTask_activityCriteria() {
+		return new Task_activityCriteria(createCriteria("task_activity"));
 	}
 	
 	public User_detail uniqueUser_detail() {

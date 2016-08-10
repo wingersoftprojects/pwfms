@@ -373,12 +373,20 @@ public class Task_activity implements Serializable {
 				getActivity().getTask_activity().remove(this);
 			}
 			
+			if(getActivity_assigned_to() != null) {
+				getActivity_assigned_to().getTask_activity().remove(this);
+			}
+			
 			if(getOutcome() != null) {
 				getOutcome().getTask_activity().remove(this);
 			}
 			
 			if(getEntity_type() != null) {
 				getEntity_type().getTask_activity().remove(this);
+			}
+			
+			if(getEntity_instance() != null) {
+				getEntity_instance().getTask_activity().remove(this);
 			}
 			
 			pwfms.Task_activity_de[] lTask_activity_des = (pwfms.Task_activity_de[])getTask_activity_de().toArray(new pwfms.Task_activity_de[getTask_activity_de().size()]);
@@ -388,6 +396,10 @@ public class Task_activity implements Serializable {
 			pwfms.Task_activity_doc[] lTask_activity_docs = (pwfms.Task_activity_doc[])getTask_activity_doc().toArray(new pwfms.Task_activity_doc[getTask_activity_doc().size()]);
 			for(int i = 0; i < lTask_activity_docs.length; i++) {
 				lTask_activity_docs[i].setTask_activity(null);
+			}
+			pwfms.Task_activity_entity[] lTask_activity_entitys = (pwfms.Task_activity_entity[])getTask_activity_entity().toArray(new pwfms.Task_activity_entity[getTask_activity_entity().size()]);
+			for(int i = 0; i < lTask_activity_entitys.length; i++) {
+				lTask_activity_entitys[i].setTask_activity(null);
 			}
 			return delete();
 		}
@@ -407,12 +419,20 @@ public class Task_activity implements Serializable {
 				getActivity().getTask_activity().remove(this);
 			}
 			
+			if(getActivity_assigned_to() != null) {
+				getActivity_assigned_to().getTask_activity().remove(this);
+			}
+			
 			if(getOutcome() != null) {
 				getOutcome().getTask_activity().remove(this);
 			}
 			
 			if(getEntity_type() != null) {
 				getEntity_type().getTask_activity().remove(this);
+			}
+			
+			if(getEntity_instance() != null) {
+				getEntity_instance().getTask_activity().remove(this);
 			}
 			
 			pwfms.Task_activity_de[] lTask_activity_des = (pwfms.Task_activity_de[])getTask_activity_de().toArray(new pwfms.Task_activity_de[getTask_activity_de().size()]);
@@ -422,6 +442,10 @@ public class Task_activity implements Serializable {
 			pwfms.Task_activity_doc[] lTask_activity_docs = (pwfms.Task_activity_doc[])getTask_activity_doc().toArray(new pwfms.Task_activity_doc[getTask_activity_doc().size()]);
 			for(int i = 0; i < lTask_activity_docs.length; i++) {
 				lTask_activity_docs[i].setTask_activity(null);
+			}
+			pwfms.Task_activity_entity[] lTask_activity_entitys = (pwfms.Task_activity_entity[])getTask_activity_entity().toArray(new pwfms.Task_activity_entity[getTask_activity_entity().size()]);
+			for(int i = 0; i < lTask_activity_entitys.length; i++) {
+				lTask_activity_entitys[i].setTask_activity(null);
 			}
 			try {
 				session.delete(this);
@@ -467,8 +491,10 @@ public class Task_activity implements Serializable {
 	@Column(name="added_by", nullable=true, length=11)	
 	private Integer added_by;
 	
-	@Column(name="activity_assigned_to", nullable=true, length=11)	
-	private Integer activity_assigned_to;
+	@ManyToOne(targetEntity=pwfms.User_detail.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="activity_assigned_to", referencedColumnName="user_detail_id") })	
+	private pwfms.User_detail activity_assigned_to;
 	
 	@Column(name="due_date", nullable=true)	
 	@Temporal(TemporalType.DATE)	
@@ -494,6 +520,11 @@ public class Task_activity implements Serializable {
 	@Column(name="comment", nullable=true, length=250)	
 	private String comment;
 	
+	@ManyToOne(targetEntity=pwfms.Entity_instance.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="entity_instance_id", referencedColumnName="entity_instance_id") })	
+	private pwfms.Entity_instance entity_instance;
+	
 	@OneToMany(mappedBy="task_activity", targetEntity=pwfms.Task_activity_de.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
@@ -503,6 +534,11 @@ public class Task_activity implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
 	private java.util.Set task_activity_doc = new java.util.HashSet();
+	
+	@OneToMany(mappedBy="task_activity", targetEntity=pwfms.Task_activity_entity.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.EXTRA)	
+	private java.util.Set task_activity_entity = new java.util.HashSet();
 	
 	private void setTask_activity_id(int value) {
 		this.task_activity_id = value;
@@ -550,18 +586,6 @@ public class Task_activity implements Serializable {
 	
 	public Integer getAdded_by() {
 		return added_by;
-	}
-	
-	public void setActivity_assigned_to(int value) {
-		setActivity_assigned_to(new Integer(value));
-	}
-	
-	public void setActivity_assigned_to(Integer value) {
-		this.activity_assigned_to = value;
-	}
-	
-	public Integer getActivity_assigned_to() {
-		return activity_assigned_to;
 	}
 	
 	public void setDue_date(java.util.Date value) {
@@ -628,6 +652,22 @@ public class Task_activity implements Serializable {
 		return activity;
 	}
 	
+	public void setActivity_assigned_to(pwfms.User_detail value) {
+		this.activity_assigned_to = value;
+	}
+	
+	public pwfms.User_detail getActivity_assigned_to() {
+		return activity_assigned_to;
+	}
+	
+	public void setEntity_instance(pwfms.Entity_instance value) {
+		this.entity_instance = value;
+	}
+	
+	public pwfms.Entity_instance getEntity_instance() {
+		return entity_instance;
+	}
+	
 	public void setTask_activity_de(java.util.Set value) {
 		this.task_activity_de = value;
 	}
@@ -643,6 +683,15 @@ public class Task_activity implements Serializable {
 	
 	public java.util.Set getTask_activity_doc() {
 		return task_activity_doc;
+	}
+	
+	
+	public void setTask_activity_entity(java.util.Set value) {
+		this.task_activity_entity = value;
+	}
+	
+	public java.util.Set getTask_activity_entity() {
+		return task_activity_entity;
 	}
 	
 	

@@ -35,6 +35,7 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression entity_type_data_element;
 	public final CollectionExpression entity_detail;
 	public final CollectionExpression task_activity_de;
+	public final CollectionExpression task_activity_entity;
 	
 	public Data_elementDetachedCriteria() {
 		super(pwfms.Data_element.class, pwfms.Data_elementCriteria.class);
@@ -54,6 +55,7 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this.getDetachedCriteria());
 		entity_detail = new CollectionExpression("entity_detail", this.getDetachedCriteria());
 		task_activity_de = new CollectionExpression("task_activity_de", this.getDetachedCriteria());
+		task_activity_entity = new CollectionExpression("task_activity_entity", this.getDetachedCriteria());
 	}
 	
 	public Data_elementDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -74,6 +76,7 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this.getDetachedCriteria());
 		entity_detail = new CollectionExpression("entity_detail", this.getDetachedCriteria());
 		task_activity_de = new CollectionExpression("task_activity_de", this.getDetachedCriteria());
+		task_activity_entity = new CollectionExpression("task_activity_entity", this.getDetachedCriteria());
 	}
 	
 	public CompanyDetachedCriteria createCompanyCriteria() {
@@ -98,6 +101,10 @@ public class Data_elementDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Task_activity_deDetachedCriteria createTask_activity_deCriteria() {
 		return new Task_activity_deDetachedCriteria(createCriteria("task_activity_de"));
+	}
+	
+	public Task_activity_entityDetachedCriteria createTask_activity_entityCriteria() {
+		return new Task_activity_entityDetachedCriteria(createCriteria("task_activity_entity"));
 	}
 	
 	public Data_element uniqueData_element(PersistentSession session) {

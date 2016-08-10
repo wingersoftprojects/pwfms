@@ -25,6 +25,8 @@ public class Entity_detailCriteria extends AbstractORMCriteria {
 	public final StringExpression data_element_value;
 	public final IntegerExpression entity_typeId;
 	public final AssociationExpression entity_type;
+	public final IntegerExpression entity_instanceId;
+	public final AssociationExpression entity_instance;
 	
 	public Entity_detailCriteria(Criteria criteria) {
 		super(criteria);
@@ -34,6 +36,8 @@ public class Entity_detailCriteria extends AbstractORMCriteria {
 		data_element_value = new StringExpression("data_element_value", this);
 		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this);
 		entity_type = new AssociationExpression("entity_type", this);
+		entity_instanceId = new IntegerExpression("entity_instance.entity_instance_id", this);
+		entity_instance = new AssociationExpression("entity_instance", this);
 	}
 	
 	public Entity_detailCriteria(PersistentSession session) {
@@ -50,6 +54,10 @@ public class Entity_detailCriteria extends AbstractORMCriteria {
 	
 	public Entity_typeCriteria createEntity_typeCriteria() {
 		return new Entity_typeCriteria(createCriteria("entity_type"));
+	}
+	
+	public Entity_instanceCriteria createEntity_instanceCriteria() {
+		return new Entity_instanceCriteria(createCriteria("entity_instance"));
 	}
 	
 	public Entity_detail uniqueEntity_detail() {

@@ -28,7 +28,8 @@ public class Task_activityCriteria extends AbstractORMCriteria {
 	public final DateExpression end_date;
 	public final DateExpression add_date;
 	public final IntegerExpression added_by;
-	public final IntegerExpression activity_assigned_to;
+	public final IntegerExpression activity_assigned_toId;
+	public final AssociationExpression activity_assigned_to;
 	public final DateExpression due_date;
 	public final DateExpression flag_date;
 	public final IntegerExpression outcomeId;
@@ -37,8 +38,11 @@ public class Task_activityCriteria extends AbstractORMCriteria {
 	public final AssociationExpression entity_type;
 	public final StringExpression status;
 	public final StringExpression comment;
+	public final IntegerExpression entity_instanceId;
+	public final AssociationExpression entity_instance;
 	public final CollectionExpression task_activity_de;
 	public final CollectionExpression task_activity_doc;
+	public final CollectionExpression task_activity_entity;
 	
 	public Task_activityCriteria(Criteria criteria) {
 		super(criteria);
@@ -51,7 +55,8 @@ public class Task_activityCriteria extends AbstractORMCriteria {
 		end_date = new DateExpression("end_date", this);
 		add_date = new DateExpression("add_date", this);
 		added_by = new IntegerExpression("added_by", this);
-		activity_assigned_to = new IntegerExpression("activity_assigned_to", this);
+		activity_assigned_toId = new IntegerExpression("activity_assigned_to.user_detail_id", this);
+		activity_assigned_to = new AssociationExpression("activity_assigned_to", this);
 		due_date = new DateExpression("due_date", this);
 		flag_date = new DateExpression("flag_date", this);
 		outcomeId = new IntegerExpression("outcome.outcome_id", this);
@@ -60,8 +65,11 @@ public class Task_activityCriteria extends AbstractORMCriteria {
 		entity_type = new AssociationExpression("entity_type", this);
 		status = new StringExpression("status", this);
 		comment = new StringExpression("comment", this);
+		entity_instanceId = new IntegerExpression("entity_instance.entity_instance_id", this);
+		entity_instance = new AssociationExpression("entity_instance", this);
 		task_activity_de = new CollectionExpression("task_activity_de", this);
 		task_activity_doc = new CollectionExpression("task_activity_doc", this);
+		task_activity_entity = new CollectionExpression("task_activity_entity", this);
 	}
 	
 	public Task_activityCriteria(PersistentSession session) {
@@ -80,6 +88,10 @@ public class Task_activityCriteria extends AbstractORMCriteria {
 		return new ActivityCriteria(createCriteria("activity"));
 	}
 	
+	public User_detailCriteria createActivity_assigned_toCriteria() {
+		return new User_detailCriteria(createCriteria("activity_assigned_to"));
+	}
+	
 	public OutcomeCriteria createOutcomeCriteria() {
 		return new OutcomeCriteria(createCriteria("outcome"));
 	}
@@ -88,12 +100,20 @@ public class Task_activityCriteria extends AbstractORMCriteria {
 		return new Entity_typeCriteria(createCriteria("entity_type"));
 	}
 	
+	public Entity_instanceCriteria createEntity_instanceCriteria() {
+		return new Entity_instanceCriteria(createCriteria("entity_instance"));
+	}
+	
 	public Task_activity_deCriteria createTask_activity_deCriteria() {
 		return new Task_activity_deCriteria(createCriteria("task_activity_de"));
 	}
 	
 	public Task_activity_docCriteria createTask_activity_docCriteria() {
 		return new Task_activity_docCriteria(createCriteria("task_activity_doc"));
+	}
+	
+	public Task_activity_entityCriteria createTask_activity_entityCriteria() {
+		return new Task_activity_entityCriteria(createCriteria("task_activity_entity"));
 	}
 	
 	public Task_activity uniqueTask_activity() {

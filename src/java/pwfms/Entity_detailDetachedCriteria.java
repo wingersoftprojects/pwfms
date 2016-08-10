@@ -25,6 +25,8 @@ public class Entity_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final StringExpression data_element_value;
 	public final IntegerExpression entity_typeId;
 	public final AssociationExpression entity_type;
+	public final IntegerExpression entity_instanceId;
+	public final AssociationExpression entity_instance;
 	
 	public Entity_detailDetachedCriteria() {
 		super(pwfms.Entity_detail.class, pwfms.Entity_detailCriteria.class);
@@ -34,6 +36,8 @@ public class Entity_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		data_element_value = new StringExpression("data_element_value", this.getDetachedCriteria());
 		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this.getDetachedCriteria());
 		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
+		entity_instanceId = new IntegerExpression("entity_instance.entity_instance_id", this.getDetachedCriteria());
+		entity_instance = new AssociationExpression("entity_instance", this.getDetachedCriteria());
 	}
 	
 	public Entity_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -44,6 +48,8 @@ public class Entity_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		data_element_value = new StringExpression("data_element_value", this.getDetachedCriteria());
 		entity_typeId = new IntegerExpression("entity_type.entity_type_id", this.getDetachedCriteria());
 		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
+		entity_instanceId = new IntegerExpression("entity_instance.entity_instance_id", this.getDetachedCriteria());
+		entity_instance = new AssociationExpression("entity_instance", this.getDetachedCriteria());
 	}
 	
 	public Data_elementDetachedCriteria createData_elementCriteria() {
@@ -52,6 +58,10 @@ public class Entity_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Entity_typeDetachedCriteria createEntity_typeCriteria() {
 		return new Entity_typeDetachedCriteria(createCriteria("entity_type"));
+	}
+	
+	public Entity_instanceDetachedCriteria createEntity_instanceCriteria() {
+		return new Entity_instanceDetachedCriteria(createCriteria("entity_instance"));
 	}
 	
 	public Entity_detail uniqueEntity_detail(PersistentSession session) {

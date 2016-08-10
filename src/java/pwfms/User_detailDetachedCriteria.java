@@ -34,6 +34,7 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression group_user;
 	public final CollectionExpression task;
 	public final CollectionExpression task1;
+	public final CollectionExpression task_activity;
 	
 	public User_detailDetachedCriteria() {
 		super(pwfms.User_detail.class, pwfms.User_detailCriteria.class);
@@ -52,6 +53,7 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
 		task = new CollectionExpression("task", this.getDetachedCriteria());
 		task1 = new CollectionExpression("task1", this.getDetachedCriteria());
+		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
 	public User_detailDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -71,6 +73,7 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 		group_user = new CollectionExpression("group_user", this.getDetachedCriteria());
 		task = new CollectionExpression("task", this.getDetachedCriteria());
 		task1 = new CollectionExpression("task1", this.getDetachedCriteria());
+		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
 	}
 	
 	public CompanyDetachedCriteria createCompanyCriteria() {
@@ -87,6 +90,10 @@ public class User_detailDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public TaskDetachedCriteria createTask1Criteria() {
 		return new TaskDetachedCriteria(createCriteria("task1"));
+	}
+	
+	public Task_activityDetachedCriteria createTask_activityCriteria() {
+		return new Task_activityDetachedCriteria(createCriteria("task_activity"));
 	}
 	
 	public User_detail uniqueUser_detail(PersistentSession session) {

@@ -373,6 +373,10 @@ public class Entity_detail implements Serializable {
 				getEntity_type().getEntity_detail().remove(this);
 			}
 			
+			if(getEntity_instance() != null) {
+				getEntity_instance().getEntity_detail().remove(this);
+			}
+			
 			return delete();
 		}
 		catch(Exception e) {
@@ -389,6 +393,10 @@ public class Entity_detail implements Serializable {
 			
 			if(getEntity_type() != null) {
 				getEntity_type().getEntity_detail().remove(this);
+			}
+			
+			if(getEntity_instance() != null) {
+				getEntity_instance().getEntity_detail().remove(this);
 			}
 			
 			try {
@@ -422,6 +430,11 @@ public class Entity_detail implements Serializable {
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns({ @JoinColumn(name="entity_type_id", referencedColumnName="entity_type_id", nullable=false) })	
 	private pwfms.Entity_type entity_type;
+	
+	@ManyToOne(targetEntity=pwfms.Entity_instance.class, fetch=FetchType.LAZY)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@JoinColumns({ @JoinColumn(name="entity_instance_id", referencedColumnName="entity_instance_id", nullable=false) })	
+	private pwfms.Entity_instance entity_instance;
 	
 	private void setEntity_detail_id(int value) {
 		this.entity_detail_id = value;
@@ -457,6 +470,14 @@ public class Entity_detail implements Serializable {
 	
 	public pwfms.Entity_type getEntity_type() {
 		return entity_type;
+	}
+	
+	public void setEntity_instance(pwfms.Entity_instance value) {
+		this.entity_instance = value;
+	}
+	
+	public pwfms.Entity_instance getEntity_instance() {
+		return entity_instance;
 	}
 	
 	public String toString() {

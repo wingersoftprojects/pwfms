@@ -27,6 +27,8 @@ public class Entity_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final CollectionExpression entity_type_data_element;
 	public final CollectionExpression entity_detail;
 	public final CollectionExpression task_activity;
+	public final CollectionExpression task_activity_entity;
+	public final CollectionExpression entity_instance;
 	
 	public Entity_typeDetachedCriteria() {
 		super(pwfms.Entity_type.class, pwfms.Entity_typeCriteria.class);
@@ -38,6 +40,8 @@ public class Entity_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this.getDetachedCriteria());
 		entity_detail = new CollectionExpression("entity_detail", this.getDetachedCriteria());
 		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
+		task_activity_entity = new CollectionExpression("task_activity_entity", this.getDetachedCriteria());
+		entity_instance = new CollectionExpression("entity_instance", this.getDetachedCriteria());
 	}
 	
 	public Entity_typeDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -50,6 +54,8 @@ public class Entity_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this.getDetachedCriteria());
 		entity_detail = new CollectionExpression("entity_detail", this.getDetachedCriteria());
 		task_activity = new CollectionExpression("task_activity", this.getDetachedCriteria());
+		task_activity_entity = new CollectionExpression("task_activity_entity", this.getDetachedCriteria());
+		entity_instance = new CollectionExpression("entity_instance", this.getDetachedCriteria());
 	}
 	
 	public CompanyDetachedCriteria createCompanyCriteria() {
@@ -70,6 +76,14 @@ public class Entity_typeDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public Task_activityDetachedCriteria createTask_activityCriteria() {
 		return new Task_activityDetachedCriteria(createCriteria("task_activity"));
+	}
+	
+	public Task_activity_entityDetachedCriteria createTask_activity_entityCriteria() {
+		return new Task_activity_entityDetachedCriteria(createCriteria("task_activity_entity"));
+	}
+	
+	public Entity_instanceDetachedCriteria createEntity_instanceCriteria() {
+		return new Entity_instanceDetachedCriteria(createCriteria("entity_instance"));
 	}
 	
 	public Entity_type uniqueEntity_type(PersistentSession session) {

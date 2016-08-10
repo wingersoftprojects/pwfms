@@ -27,6 +27,8 @@ public class Entity_typeCriteria extends AbstractORMCriteria {
 	public final CollectionExpression entity_type_data_element;
 	public final CollectionExpression entity_detail;
 	public final CollectionExpression task_activity;
+	public final CollectionExpression task_activity_entity;
+	public final CollectionExpression entity_instance;
 	
 	public Entity_typeCriteria(Criteria criteria) {
 		super(criteria);
@@ -38,6 +40,8 @@ public class Entity_typeCriteria extends AbstractORMCriteria {
 		entity_type_data_element = new CollectionExpression("entity_type_data_element", this);
 		entity_detail = new CollectionExpression("entity_detail", this);
 		task_activity = new CollectionExpression("task_activity", this);
+		task_activity_entity = new CollectionExpression("task_activity_entity", this);
+		entity_instance = new CollectionExpression("entity_instance", this);
 	}
 	
 	public Entity_typeCriteria(PersistentSession session) {
@@ -66,6 +70,14 @@ public class Entity_typeCriteria extends AbstractORMCriteria {
 	
 	public Task_activityCriteria createTask_activityCriteria() {
 		return new Task_activityCriteria(createCriteria("task_activity"));
+	}
+	
+	public Task_activity_entityCriteria createTask_activity_entityCriteria() {
+		return new Task_activity_entityCriteria(createCriteria("task_activity_entity"));
+	}
+	
+	public Entity_instanceCriteria createEntity_instanceCriteria() {
+		return new Entity_instanceCriteria(createCriteria("entity_instance"));
 	}
 	
 	public Entity_type uniqueEntity_type() {

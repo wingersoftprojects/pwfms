@@ -38,5 +38,5 @@ public class OutcomeBean extends AbstractBean<Outcome> implements Serializable {
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
-
+    
 }

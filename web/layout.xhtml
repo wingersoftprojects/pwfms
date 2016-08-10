@@ -32,8 +32,8 @@
 
                                                 <p:menubar>      
                                                    <p:submenu label="Run Time"> 
-                                                        <p:menuitem value="Start New Task" action="tasknew?faces-redirect=true" rendered="#{1==1}"/>  
-                                                        <p:menuitem value="Manage Task" action="home?faces-redirect=true" rendered="#{1==1}"/> 
+                                                        <p:menuitem value="Start New Process" action="new_process?faces-redirect=true" rendered="#{1==1}"/>  
+                                                        <p:menuitem value="Manage Task" action="manage_task?faces-redirect=true" rendered="#{1==1}"/> 
                                                         <p:menuitem value="Manage Entity" action="home?faces-redirect=true" rendered="#{1==1}"/> 
                                                     </p:submenu>
                                                     
@@ -76,10 +76,10 @@
                                             <p:accordionPanel multiple="true" activeIndex="-1">
                                                 <p:tab title="OVERDUE TASKS (4)" titleStyle="background: red !important; color:black !important">
                                                     <p:panel  class="overduetasks notifications">
-                                                        <p:commandLink value="Overdue Task 1" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Overdue Task 11" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Overdue Task 111" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Overdue Task 1111" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
+                                                        <p:commandLink value="Approve Registration" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        <p:commandLink value="Validate Checklist for GMC EOI" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        <p:commandLink value="Submit Bid for URA ERP" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        <p:commandLink value="Generate Reg Number for Jude" update="@form" style="color: red" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
                                                     </p:panel>
                                                 </p:tab>
                                                 <p:tab title="FLAGGED TASKS (5)" titleStyle="background: yellow !important; color:black !important">
@@ -93,8 +93,8 @@
                                                 </p:tab>
                                                 <p:tab title="PENDING TASKS (2)" titleStyle="background: greenyellow; color:black !important">
                                                     <p:panel  class="pendingtasks notifications">
-                                                        <p:commandLink value="Overdue Task a" update="@form" style="color: black;" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
-                                                        <p:commandLink value="Overdue Task b" update="@form" style="color: black;" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim>
+                                                        <p:commandLink value="Upload Registration DOCs for Ddembe" update="@form" style="color: black;" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
+                                                        <p:commandLink value="Validate Registration Details for Catherine.K" update="@form" style="color: black;" ajax="false" action="home?faces-redirect=true"/><f:verbatim><br/></f:verbatim><f:verbatim><br/></f:verbatim>
                                                     </p:panel>
                                                 </p:tab>
                                             </p:accordionPanel>

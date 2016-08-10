@@ -28,7 +28,8 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final DateExpression end_date;
 	public final DateExpression add_date;
 	public final IntegerExpression added_by;
-	public final IntegerExpression activity_assigned_to;
+	public final IntegerExpression activity_assigned_toId;
+	public final AssociationExpression activity_assigned_to;
 	public final DateExpression due_date;
 	public final DateExpression flag_date;
 	public final IntegerExpression outcomeId;
@@ -37,8 +38,11 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final AssociationExpression entity_type;
 	public final StringExpression status;
 	public final StringExpression comment;
+	public final IntegerExpression entity_instanceId;
+	public final AssociationExpression entity_instance;
 	public final CollectionExpression task_activity_de;
 	public final CollectionExpression task_activity_doc;
+	public final CollectionExpression task_activity_entity;
 	
 	public Task_activityDetachedCriteria() {
 		super(pwfms.Task_activity.class, pwfms.Task_activityCriteria.class);
@@ -51,7 +55,8 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 		end_date = new DateExpression("end_date", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
 		added_by = new IntegerExpression("added_by", this.getDetachedCriteria());
-		activity_assigned_to = new IntegerExpression("activity_assigned_to", this.getDetachedCriteria());
+		activity_assigned_toId = new IntegerExpression("activity_assigned_to.user_detail_id", this.getDetachedCriteria());
+		activity_assigned_to = new AssociationExpression("activity_assigned_to", this.getDetachedCriteria());
 		due_date = new DateExpression("due_date", this.getDetachedCriteria());
 		flag_date = new DateExpression("flag_date", this.getDetachedCriteria());
 		outcomeId = new IntegerExpression("outcome.outcome_id", this.getDetachedCriteria());
@@ -60,8 +65,11 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
 		status = new StringExpression("status", this.getDetachedCriteria());
 		comment = new StringExpression("comment", this.getDetachedCriteria());
+		entity_instanceId = new IntegerExpression("entity_instance.entity_instance_id", this.getDetachedCriteria());
+		entity_instance = new AssociationExpression("entity_instance", this.getDetachedCriteria());
 		task_activity_de = new CollectionExpression("task_activity_de", this.getDetachedCriteria());
 		task_activity_doc = new CollectionExpression("task_activity_doc", this.getDetachedCriteria());
+		task_activity_entity = new CollectionExpression("task_activity_entity", this.getDetachedCriteria());
 	}
 	
 	public Task_activityDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -75,7 +83,8 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 		end_date = new DateExpression("end_date", this.getDetachedCriteria());
 		add_date = new DateExpression("add_date", this.getDetachedCriteria());
 		added_by = new IntegerExpression("added_by", this.getDetachedCriteria());
-		activity_assigned_to = new IntegerExpression("activity_assigned_to", this.getDetachedCriteria());
+		activity_assigned_toId = new IntegerExpression("activity_assigned_to.user_detail_id", this.getDetachedCriteria());
+		activity_assigned_to = new AssociationExpression("activity_assigned_to", this.getDetachedCriteria());
 		due_date = new DateExpression("due_date", this.getDetachedCriteria());
 		flag_date = new DateExpression("flag_date", this.getDetachedCriteria());
 		outcomeId = new IntegerExpression("outcome.outcome_id", this.getDetachedCriteria());
@@ -84,8 +93,11 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 		entity_type = new AssociationExpression("entity_type", this.getDetachedCriteria());
 		status = new StringExpression("status", this.getDetachedCriteria());
 		comment = new StringExpression("comment", this.getDetachedCriteria());
+		entity_instanceId = new IntegerExpression("entity_instance.entity_instance_id", this.getDetachedCriteria());
+		entity_instance = new AssociationExpression("entity_instance", this.getDetachedCriteria());
 		task_activity_de = new CollectionExpression("task_activity_de", this.getDetachedCriteria());
 		task_activity_doc = new CollectionExpression("task_activity_doc", this.getDetachedCriteria());
+		task_activity_entity = new CollectionExpression("task_activity_entity", this.getDetachedCriteria());
 	}
 	
 	public TaskDetachedCriteria createTaskCriteria() {
@@ -96,6 +108,10 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new ActivityDetachedCriteria(createCriteria("activity"));
 	}
 	
+	public User_detailDetachedCriteria createActivity_assigned_toCriteria() {
+		return new User_detailDetachedCriteria(createCriteria("activity_assigned_to"));
+	}
+	
 	public OutcomeDetachedCriteria createOutcomeCriteria() {
 		return new OutcomeDetachedCriteria(createCriteria("outcome"));
 	}
@@ -104,12 +120,20 @@ public class Task_activityDetachedCriteria extends AbstractORMDetachedCriteria {
 		return new Entity_typeDetachedCriteria(createCriteria("entity_type"));
 	}
 	
+	public Entity_instanceDetachedCriteria createEntity_instanceCriteria() {
+		return new Entity_instanceDetachedCriteria(createCriteria("entity_instance"));
+	}
+	
 	public Task_activity_deDetachedCriteria createTask_activity_deCriteria() {
 		return new Task_activity_deDetachedCriteria(createCriteria("task_activity_de"));
 	}
 	
 	public Task_activity_docDetachedCriteria createTask_activity_docCriteria() {
 		return new Task_activity_docDetachedCriteria(createCriteria("task_activity_doc"));
+	}
+	
+	public Task_activity_entityDetachedCriteria createTask_activity_entityCriteria() {
+		return new Task_activity_entityDetachedCriteria(createCriteria("task_activity_entity"));
 	}
 	
 	public Task_activity uniqueTask_activity(PersistentSession session) {

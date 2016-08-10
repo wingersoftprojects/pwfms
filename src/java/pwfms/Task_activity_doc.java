@@ -420,8 +420,11 @@ public class Task_activity_doc implements Serializable {
 	@JoinColumns({ @JoinColumn(name="document_type_id", referencedColumnName="document_type_id", nullable=false) })	
 	private pwfms.Document_type document_type;
 	
-	@Column(name="document_value", nullable=false)	
+	@Column(name="document_value", nullable=true)	
 	private java.sql.Blob document_value;
+	
+	@Column(name="document_url", nullable=true, length=250)	
+	private String document_url;
 	
 	private void setTask_activity_doc_id(int value) {
 		this.task_activity_doc_id = value;
@@ -441,6 +444,14 @@ public class Task_activity_doc implements Serializable {
 	
 	public java.sql.Blob getDocument_value() {
 		return document_value;
+	}
+	
+	public void setDocument_url(String value) {
+		this.document_url = value;
+	}
+	
+	public String getDocument_url() {
+		return document_url;
 	}
 	
 	public void setDocument_type(pwfms.Document_type value) {

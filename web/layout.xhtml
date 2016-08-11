@@ -45,9 +45,12 @@
                                                     </p:submenu>
 
                                                     <p:submenu label="Reporting"> 
+                                                        <p:menuitem value="Entity Report" action="report_entity?faces-redirect=true" rendered="#{1==2}"/>
                                                         <p:menuitem value="Pending Activites" action="report_pend_act?faces-redirect=true" rendered="#{1==1}"/> 
                                                         <p:menuitem value="Completed Activities" action="report_comp_act?faces-redirect=true" rendered="#{1==1}"/> 
                                                     </p:submenu>
+                                                    
+                                                    <p:menuitem value="Refresh" action="#{generalUtilities.refreshAllList()}" rendered="#{1==1}" update="@all"/> 
 
                                                     <p:submenu label="#{loginBean.user_detail.user_name}" style="float: right; background: darkorange;" rendered="#{1==1}">  
                                                         <p:menuitem value="Logout" action="#{loginBean.logout()}" update="@all" ajax="false" />

@@ -28,8 +28,8 @@ import utilities.Security;
 @SessionScoped
 public class LoginBean implements Serializable {
 
-    private String username="Wence";
-    private String password="12345678";
+    private String username;
+    private String password;
     private boolean isloggedin = false;
     private String action = "login";
     private String messageString = "";
